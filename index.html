@@ -1,0 +1,3010 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Network Security - PEC321</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap");
+      :root {
+        --primary: #1a237e;
+        --accent: #ff6f00;
+        --green: #2e7d32;
+        --red: #c62828;
+        --purple: #6a1b9a;
+        --pink: #880e4f;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Roboto", sans-serif;
+        background: #f5f5f5;
+        font-size: 13px;
+        line-height: 1.6;
+      }
+      @media print {
+        body {
+          background: white;
+          font-size: 11px;
+        }
+        .no-print {
+          display: none !important;
+        }
+        .page-break {
+          page-break-before: always;
+        }
+      }
+      .main-header {
+        background: linear-gradient(135deg, #1a237e, #3949ab, #ff6f00);
+        color: white;
+        padding: 30px 40px;
+        text-align: center;
+      }
+      .main-header h1 {
+        font-size: 26px;
+        font-weight: 900;
+        letter-spacing: 2px;
+      }
+      .header-badges {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        margin-top: 12px;
+        flex-wrap: wrap;
+      }
+      .badge {
+        background: rgba(255, 255, 255, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        padding: 4px 14px;
+        border-radius: 20px;
+        font-size: 11px;
+      }
+      .print-btn {
+        display: block;
+        margin: 15px auto;
+        padding: 10px 30px;
+        background: #1a237e;
+        color: white;
+        border: none;
+        border-radius: 25px;
+        font-size: 14px;
+        font-weight: 700;
+        cursor: pointer;
+      }
+      .container {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      .unit-header {
+        background: linear-gradient(135deg, #1a237e, #283593);
+        color: white;
+        padding: 16px 25px;
+        border-radius: 12px 12px 0 0;
+        margin-top: 30px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .unit-num {
+        background: #ff6f00;
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 17px;
+        font-weight: 900;
+        flex-shrink: 0;
+      }
+      .unit-title {
+        font-size: 17px;
+        font-weight: 700;
+      }
+      .unit-sub {
+        font-size: 11px;
+        opacity: 0.8;
+        margin-top: 2px;
+      }
+      .marks-badge {
+        margin-left: auto;
+        background: #ff6f00;
+        padding: 5px 14px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 700;
+        white-space: nowrap;
+      }
+      .topic-container {
+        background: white;
+        border-radius: 0 0 12px 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        margin-bottom: 8px;
+      }
+      .topic-header {
+        padding: 12px 22px;
+        font-size: 14px;
+        font-weight: 700;
+        color: white;
+        display: flex;
+        align-items: center;
+      }
+      .t1 {
+        background: linear-gradient(90deg, #1565c0, #1976d2);
+      }
+      .t2 {
+        background: linear-gradient(90deg, #2e7d32, #388e3c);
+      }
+      .topic-marks {
+        margin-left: auto;
+        background: rgba(255, 255, 255, 0.25);
+        padding: 3px 12px;
+        border-radius: 12px;
+        font-size: 11px;
+      }
+      .points-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0;
+      }
+      .point-item {
+        padding: 12px 18px;
+        border-bottom: 1px solid #f0f0f0;
+        border-right: 1px solid #f0f0f0;
+      }
+      .point-item:nth-child(even) {
+        border-right: none;
+      }
+      .point-num {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 22px;
+        height: 22px;
+        background: #1a237e;
+        color: white;
+        border-radius: 50%;
+        font-size: 10px;
+        font-weight: 700;
+        margin-right: 7px;
+        vertical-align: middle;
+      }
+      .point-title {
+        font-weight: 700;
+        font-size: 12px;
+        color: #1a237e;
+      }
+      .point-body {
+        margin-top: 4px;
+        font-size: 11px;
+        color: #444;
+        padding-left: 29px;
+        line-height: 1.5;
+      }
+      .real-life-section {
+        background: linear-gradient(135deg, #fff8e1, #fff3e0);
+        border-left: 5px solid #ff6f00;
+        margin: 0 18px 18px;
+        padding: 14px 16px;
+        border-radius: 0 8px 8px 0;
+      }
+      .real-life-title {
+        font-size: 12px;
+        font-weight: 800;
+        color: #ff6f00;
+        margin-bottom: 8px;
+      }
+      .example-row {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 8px;
+      }
+      .example-card {
+        background: white;
+        border-radius: 8px;
+        padding: 9px 11px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+        border-top: 3px solid #ff6f00;
+      }
+      .ex-concept {
+        font-size: 10px;
+        font-weight: 700;
+        color: #1a237e;
+        margin-bottom: 3px;
+      }
+      .ex-icon {
+        font-size: 17px;
+        margin-bottom: 3px;
+        display: block;
+      }
+      .ex-text {
+        font-size: 10px;
+        color: #555;
+        line-height: 1.5;
+      }
+      .attack-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 8px;
+        padding: 14px 18px;
+      }
+      .attack-box {
+        background: linear-gradient(135deg, #ffebee, #fce4ec);
+        border: 1px solid #ef9a9a;
+        border-radius: 10px;
+        padding: 11px;
+        text-align: center;
+      }
+      .a-icon {
+        font-size: 22px;
+        margin-bottom: 4px;
+        display: block;
+      }
+      .a-name {
+        font-size: 11px;
+        font-weight: 700;
+        color: #c62828;
+      }
+      .a-desc {
+        font-size: 10px;
+        color: #666;
+        margin-top: 3px;
+      }
+      .comp-table {
+        width: calc(100% - 36px);
+        border-collapse: collapse;
+        margin: 12px 18px;
+        font-size: 11px;
+      }
+      .comp-table th {
+        background: #1a237e;
+        color: white;
+        padding: 8px 10px;
+        text-align: left;
+      }
+      .comp-table td {
+        padding: 7px 10px;
+        border-bottom: 1px solid #e0e0e0;
+      }
+      .comp-table tr:nth-child(even) {
+        background: #f5f7ff;
+      }
+      .telugu-section {
+        background: linear-gradient(135deg, #fce4ec, #f8bbd0);
+        border-radius: 12px;
+        margin-top: 30px;
+        overflow: hidden;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      }
+      .telugu-header {
+        background: linear-gradient(135deg, #880e4f, #c2185b);
+        color: white;
+        padding: 16px 25px;
+        font-size: 18px;
+        font-weight: 800;
+        text-align: center;
+        letter-spacing: 2px;
+      }
+      .telugu-unit {
+        background: white;
+        margin: 12px;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      }
+      .telugu-unit-header {
+        background: linear-gradient(90deg, #880e4f, #ad1457);
+        color: white;
+        padding: 10px 18px;
+        font-weight: 700;
+        font-size: 13px;
+      }
+      .telugu-point {
+        padding: 10px 18px;
+        border-bottom: 1px solid #fce4ec;
+      }
+      .telugu-point-title {
+        font-weight: 700;
+        color: #880e4f;
+        font-size: 12px;
+      }
+      .telugu-point-body {
+        font-size: 11px;
+        color: #444;
+        margin-top: 3px;
+        line-height: 1.6;
+        font-style: italic;
+      }
+      .mindmap-section {
+        background: white;
+        border-radius: 12px;
+        margin-top: 30px;
+        padding: 22px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      }
+      .mindmap-title {
+        text-align: center;
+        font-size: 20px;
+        font-weight: 900;
+        color: #1a237e;
+        margin-bottom: 22px;
+        padding-bottom: 12px;
+        border-bottom: 3px solid #ff6f00;
+      }
+      .mm-center {
+        background: linear-gradient(135deg, #1a237e, #3949ab);
+        color: white;
+        padding: 18px 32px;
+        border-radius: 50px;
+        font-size: 16px;
+        font-weight: 900;
+        text-align: center;
+        box-shadow: 0 8px 25px rgba(26, 35, 126, 0.35);
+        display: inline-block;
+      }
+      .mm-center-wrap {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      .mm-units-row {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      .mm-unit-block {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+        flex: 1;
+        min-width: 155px;
+        max-width: 195px;
+      }
+      .mm-unit-node {
+        padding: 9px 12px;
+        border-radius: 22px;
+        font-size: 11px;
+        font-weight: 800;
+        text-align: center;
+        color: white;
+        width: 100%;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      }
+      .mm-u1 {
+        background: linear-gradient(135deg, #e53935, #c62828);
+      }
+      .mm-u2 {
+        background: linear-gradient(135deg, #fb8c00, #e65100);
+      }
+      .mm-u3 {
+        background: linear-gradient(135deg, #43a047, #2e7d32);
+      }
+      .mm-u4 {
+        background: linear-gradient(135deg, #1e88e5, #1565c0);
+      }
+      .mm-u5 {
+        background: linear-gradient(135deg, #8e24aa, #6a1b9a);
+      }
+      .mm-subtopics {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+      .mm-sub {
+        padding: 5px 9px;
+        border-radius: 7px;
+        font-size: 10px;
+        font-weight: 600;
+        text-align: center;
+      }
+      .footer {
+        background: #1a237e;
+        color: white;
+        text-align: center;
+        padding: 18px;
+        margin-top: 35px;
+        font-size: 11px;
+      }
+      .section-divider {
+        height: 4px;
+        background: linear-gradient(90deg, #1a237e, #ff6f00, #2e7d32, #6a1b9a);
+        margin: 25px 0;
+        border-radius: 2px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main-header">
+      <h1>🔐 NETWORK SECURITY — PEC321</h1>
+      <div style="font-size: 14px; opacity: 0.9; margin-top: 6px">
+        Osmania University — MCA | Professional Elective II | 2025–2026
+      </div>
+      <div class="header-badges">
+        <span class="badge">📘 PEC321</span
+        ><span class="badge">⭐ 3 Credits</span
+        ><span class="badge">📝 5 Units × 14 Marks</span
+        ><span class="badge">🌍 Real-Life Examples</span
+        ><span class="badge">🧠 Mind Map</span>
+      </div>
+    </div>
+    <button class="print-btn no-print" onclick="window.print()">
+      🖨️ Save as PDF / Print
+    </button>
+    <div class="container">
+      <!-- ENGLISH HEADING -->
+      <h2
+        style="
+          text-align: center;
+          font-size: 18px;
+          padding: 13px;
+          background: linear-gradient(90deg, #1a237e, #283593);
+          color: white;
+          border-radius: 10px;
+          margin-bottom: 18px;
+          letter-spacing: 3px;
+        "
+      >
+        ═══ ENGLISH MEDIUM ═══
+      </h2>
+
+      <!-- UNIT I -->
+      <div class="unit-header">
+        <div class="unit-num">I</div>
+        <div>
+          <div class="unit-title">Introduction to Network Security</div>
+          <div class="unit-sub">
+            Attributes • Types of Attacks • Worms • Viruses • Trojans
+          </div>
+        </div>
+        <div class="marks-badge">14 Marks</div>
+      </div>
+      <div class="topic-container">
+        <div class="topic-header t1">
+          ⭐ TOPIC 1: Attributes of Security
+          <span class="topic-marks">7 Marks</span>
+        </div>
+        <div class="points-grid">
+          <div class="point-item">
+            <span class="point-num">1</span
+            ><span class="point-title">Integrity</span>
+            <div class="point-body">
+              Data must not be modified during transmission. Any unauthorized
+              change must be detectable. Checksums and hash functions ensure
+              integrity.
+            </div>
+          </div>
+          <div class="point-item">
+            <span class="point-num">2</span
+            ><span class="point-title">Authenticity</span>
+            <div class="point-body">
+              Verify the identity of the sender. Ensures message comes from a
+              genuine, trusted source — not a fake or impersonator.
+            </div>
+          </div>
+          <div class="point-item">
+            <span class="point-num">3</span
+            ><span class="point-title">Non-Repudiation</span>
+            <div class="point-body">
+              Sender cannot deny sending the message. Provides legal proof of
+              origin. Achieved using digital signatures under IT Act.
+            </div>
+          </div>
+          <div class="point-item">
+            <span class="point-num">4</span
+            ><span class="point-title">Confidentiality</span>
+            <div class="point-body">
+              Information must be hidden from unauthorized persons. Only the
+              intended recipient can read data. Maintained through encryption
+              (AES, RSA).
+            </div>
+          </div>
+          <div class="point-item">
+            <span class="point-num">5</span
+            ><span class="point-title">Authorization</span>
+            <div class="point-body">
+              Only permitted users can access system resources. Access control
+              lists and role-based policies enforce this attribute.
+            </div>
+          </div>
+          <div class="point-item">
+            <span class="point-num">6</span
+            ><span class="point-title">Anonymity</span>
+            <div class="point-body">
+              User identity can be hidden during certain communications.
+              Protects privacy. Used in private browsing and anonymous networks
+              like Tor.
+            </div>
+          </div>
+          <div class="point-item" style="grid-column: 1/-1; border-right: none">
+            <span class="point-num">7</span
+            ><span class="point-title">Availability</span>
+            <div class="point-body">
+              System and data must always be accessible to authorized users when
+              needed. DoS attacks destroy availability by overloading servers
+              with millions of fake requests.
+            </div>
+          </div>
+        </div>
+        <div class="real-life-section">
+          <div class="real-life-title">
+            🌍 REAL-LIFE EXAMPLES — Security Attributes
+          </div>
+          <div class="example-row">
+            <div class="example-card">
+              <span class="ex-icon">🏦</span>
+              <div class="ex-concept">Integrity — UPI Transfer</div>
+              <div class="ex-text">
+                When you transfer ₹10,000 via UPI, the bank ensures the amount
+                isn't changed to ₹1,00,000 during transmission using checksum
+                verification.
+              </div>
+            </div>
+            <div class="example-card">
+              <span class="ex-icon">📧</span>
+              <div class="ex-concept">Authenticity — Gmail Verified</div>
+              <div class="ex-text">
+                Gmail shows a ✓ verified badge on emails from banks to confirm
+                the email truly came from them and not a scammer impersonating
+                them.
+              </div>
+            </div>
+            <div class="example-card">
+              <span class="ex-icon">📜</span>
+              <div class="ex-concept">Non-Repudiation — Aadhaar eSign</div>
+              <div class="ex-text">
+                When you sign a loan document digitally on Aadhaar eSign, you
+                cannot later claim "I never signed this." The digital signature
+                is legal proof in court.
+              </div>
+            </div>
+            <div class="example-card">
+              <span class="ex-icon">🔐</span>
+              <div class="ex-concept">Confidentiality — WhatsApp E2E</div>
+              <div class="ex-text">
+                WhatsApp uses end-to-end encryption so only you and the
+                recipient can read messages — not even WhatsApp servers can see
+                the content.
+              </div>
+            </div>
+            <div class="example-card">
+              <span class="ex-icon">🏢</span>
+              <div class="ex-concept">Authorization — Company Files</div>
+              <div class="ex-text">
+                In TCS, only the Finance Manager can access salary sheets.
+                Regular employees get "Access Denied" when they try to open the
+                same HR file.
+              </div>
+            </div>
+            <div class="example-card">
+              <span class="ex-icon">💥</span>
+              <div class="ex-concept">Availability — GitHub DDoS 2018</div>
+              <div class="ex-text">
+                GitHub suffered the largest ever DDoS attack — 1.35 Tbps flooded
+                their servers, making the site unavailable for 10 minutes
+                worldwide.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-header t2">
+          ⭐ TOPIC 2: Types of Attacks & General Threats
+          <span class="topic-marks">7 Marks</span>
+        </div>
+        <div class="attack-grid">
+          <div class="attack-box">
+            <span class="a-icon">💥</span>
+            <div class="a-name">DoS Attack</div>
+            <div class="a-desc">
+              Floods server with fake requests, making it unavailable to real
+              users. Exhausts CPU and bandwidth.
+            </div>
+          </div>
+          <div class="attack-box">
+            <span class="a-icon">🎭</span>
+            <div class="a-name">IP Spoofing</div>
+            <div class="a-desc">
+              Fakes the source IP address to hide attacker's real identity and
+              bypass firewalls.
+            </div>
+          </div>
+          <div class="attack-box">
+            <span class="a-icon">🔄</span>
+            <div class="a-name">Replay Attack</div>
+            <div class="a-desc">
+              Captures valid packets and retransmits them later to gain
+              unauthorized access.
+            </div>
+          </div>
+          <div class="attack-box">
+            <span class="a-icon">🕵️</span>
+            <div class="a-name">MITM Attack</div>
+            <div class="a-desc">
+              Secretly sits between two parties to read and modify messages
+              without either knowing.
+            </div>
+          </div>
+          <div class="attack-box">
+            <span class="a-icon">🐛</span>
+            <div class="a-name">Worms</div>
+            <div class="a-desc">
+              Self-replicating programs spreading through networks automatically
+              without user action.
+            </div>
+          </div>
+          <div class="attack-box">
+            <span class="a-icon">🦠</span>
+            <div class="a-name">Viruses</div>
+            <div class="a-desc">
+              Malicious code attached to programs, activates when infected
+              program is executed.
+            </div>
+          </div>
+          <div class="attack-box">
+            <span class="a-icon">🐴</span>
+            <div class="a-name">Trojans</div>
+            <div class="a-desc">
+              Appears useful but secretly opens backdoors for attackers to
+              control the system.
+            </div>
+          </div>
+        </div>
+        <div class="real-life-section">
+          <div class="real-life-title">
+            🌍 REAL-LIFE EXAMPLES — Famous Attacks
+          </div>
+          <div class="example-row">
+            <div class="example-card">
+              <span class="ex-icon">🐛</span>
+              <div class="ex-concept">Worm — WannaCry 2017</div>
+              <div class="ex-text">
+                WannaCry ransomware worm infected 2,30,000 computers in 150
+                countries in one day, including India's Andhra Pradesh Police
+                department servers.
+              </div>
+            </div>
+            <div class="example-card">
+              <span class="ex-icon">🐴</span>
+              <div class="ex-concept">Trojan — Zeus Banking</div>
+              <div class="ex-text">
+                Zeus Trojan disguised as a PDF reader infected millions of PCs,
+                stealing banking credentials and silently transferring money to
+                hackers' accounts.
+              </div>
+            </div>
+            <div class="example-card">
+              <span class="ex-icon">🕵️</span>
+              <div class="ex-concept">MITM — Cafe WiFi Attack</div>
+              <div class="ex-text">
+                Hackers set up fake "Free Cafe WiFi" hotspots. When customers
+                connect to order food, all their banking passwords and OTPs are
+                captured in real time.
+              </div>
+            </div>
+            <div class="example-card">
+              <span class="ex-icon">🔄</span>
+              <div class="ex-concept">Replay — Old OTP Reuse</div>
+              <div class="ex-text">
+                Old banking systems without timestamps allowed captured OTPs to
+                be replayed minutes later. Modern systems use time-bound OTPs
+                (30-second expiry) to prevent this.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- UNIT II -->
+      <div class="unit-header" style="margin-top: 25px">
+        <div class="unit-num">II</div>
+        <div>
+          <div class="unit-title">Cryptography</div>
+          <div class="unit-sub">
+            DES • Triple DES • AES • RSA • ECC • Diffie-Hellman • JCE
+          </div>
+        </div>
+        <div class="marks-badge">14 Marks</div>
+      </div>
+      <div class="topic-container">
+        <div class="topic-header t1">
+          ⭐ TOPIC 1: Secret Key Cryptography
+          <span class="topic-marks">7 Marks</span>
+        </div>
+        <div class="points-grid">
+          <div class="point-item">
+            <span class="point-num">1</span
+            ><span class="point-title">Introduction to Secret Key</span>
+            <div class="point-body">
+              Same key for both encryption and decryption — also called
+              symmetric cryptography. Both parties must share the key securely
+              before communication.
+            </div>
+          </div>
+          <div class="point-item">
+            <span class="point-num">2</span
+            ><span class="point-title">DES (Data Encryption Standard)</span>
+            <div class="point-body">
+              56-bit key, 64-bit block size, 16 rounds of operations. Now
+              considered weak — 56-bit key is too short and can be brute-forced
+              in hours.
+            </div>
+          </div>
+          <div class="point-item">
+            <span class="point-num">3</span
+            ><span class="point-title">Triple DES (3DES)</span>
+            <div class="point-body">
+              DES applied 3 times: Encrypt(K1) → Decrypt(K2) → Encrypt(K3).
+              Effective key = 168 bits. Much stronger than DES. Used in legacy
+              banking systems.
+            </div>
+          </div>
+          <div class="point-item">
+            <span class="point-num">4</span
+            ><span class="point-title">AES (Advanced Encryption Standard)</span>
+            <div class="point-body">
+              Current gold standard. Key sizes: 128/192/256 bits. Operates on
+              4×4 byte state matrix with SubBytes, ShiftRows, MixColumns,
+              AddRoundKey operations per round.
+            </div>
+          </div>
+          <div class="point-item">
+            <span class="point-num">5</span
+            ><span class="point-title">Key Distribution</span>
+            <div class="point-body">
+              Securely delivering secret keys. Key Distribution Center (KDC)
+              manages keys centrally. Kerberos protocol is the most popular KDC
+              system in enterprise networks.
+            </div>
+          </div>
+          <div class="point-item">
+            <span class="point-num">6</span
+            ><span class="point-title">Attacks on Secret Key</span>
+            <div class="point-body">
+              <b>Brute Force:</b> Tries all possible keys.
+              <b>Dictionary:</b> Uses precomputed key list.
+              <b>Differential Cryptanalysis:</b> Analyzes plaintext-ciphertext
+              pairs to deduce the key.
+            </div>
+          </div>
+          <div class="point-item" style="grid-column: 1/-1; border-right: none">
+            <span class="point-num">7</span
+            ><span class="point-title">Advantages & Disadvantages</span>
+            <div class="point-body">
+              <b>Advantages:</b> Very fast, efficient for large data volumes,
+              simple implementation. <b>Disadvantages:</b> Key distribution
+              problem — securely sharing the key without interception is the
+              main challenge.
+            </div>
+          </div>
+        </div>
+        <div class="real-life-section">
+          <div class="real-life-title">
+            🌍 REAL-LIFE EXAMPLES — Secret Key Cryptography
+          </div>
+          <div class="example-row">
+            <div class="example-card">
+              <span class="ex-icon">📶</span>
+              <div class="ex-concept">AES — Home WiFi WPA2</div>
+              <div class="ex-text">
+                Your home WiFi router uses AES-128 encryption. Every packet your
+                phone sends is encrypted — neighbors who capture your packets
+                see only meaningless random bytes.
+              </div>
+            </div>
+            <div class="example-card">
+              <span class="ex-icon">📀</span>
+              <div class="ex-concept">AES — Windows BitLocker</div>
+              <div class="ex-text">
+                Windows BitLocker uses AES-256 to encrypt your entire hard
+                drive. If your laptop is stolen, the thief sees only encrypted
+                garbage — all files are completely unreadable.
+              </div>
+            </div>
+            <div class="example-card">
+              <span class="ex-icon">💳</span>
+              <div class="ex-concept">3DES — Old ATM PIN</div>
+              <div class="ex-text">
+                Indian bank ATMs used 3DES to encrypt the PIN block sent from
+                ATM to bank server. The PIN was never transmitted in plain text
+                — always 3DES encrypted.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-header t2">
+          ⭐ TOPIC 2: Public Key Cryptography
+          <span class="topic-marks">7 Marks</span>
+        </div>
+        <div class="points-grid">
+          <div class="point-item">
+            <span class="point-num">1</span
+            ><span class="point-title">Introduction to Public Key</span>
+            <div class="point-body">
+              Two mathematically related keys: Public key (shared openly) +
+              Private key (kept secret). Message encrypted with public key can
+              ONLY be decrypted with private key.
+            </div>
+          </div>
+          <div class="point-item">
+            <span class="point-num">2</span
+            ><span class="point-title">RSA Algorithm</span>
+            <div class="point-body">
+              Based on difficulty of factoring large prime products (N = p × q).
+              Used for both encryption AND digital signatures. Most widely
+              deployed public key algorithm worldwide.
+            </div>
+          </div>
+          <div class="point-item">
+            <span class="point-num">3</span
+            ><span class="point-title">ECC (Elliptic Curve Cryptography)</span>
+            <div class="point-body">
+              Based on elliptic curves over finite fields. 256-bit ECC key =
+              security of 3072-bit RSA key. Ideal for mobile devices due to
+              small key size and low power consumption.
+            </div>
+          </div>
+          <div class="point-item">
+            <span class="point-num">4</span
+            ><span class="point-title">Diffie-Hellman Key Exchange</span>
+            <div class="point-body">
+              Two parties generate shared secret over insecure channel WITHOUT
+              sending the actual key. Based on discrete logarithm problem. Used
+              in every HTTPS connection today.
+            </div>
+          </div>
+          <div class="point-item">
+            <span class="point-num">5</span
+            ><span class="point-title">Java Cryptography Extensions (JCE)</span>
+            <div class="point-body">
+              Java APIs for cryptographic operations. Supports AES, RSA, SHA,
+              MD5. Key classes: Cipher (encryption), KeyGenerator, MessageDigest
+              (hashing), KeyPairGenerator.
+            </div>
+          </div>
+          <div class="point-item">
+            <span class="point-num">6</span
+            ><span class="point-title">Attacks on Public Key</span>
+            <div class="point-body">
+              <b>MITM on DH:</b> Intercepts key exchange.
+              <b>Factoring Attack:</b> Factor N to break RSA.
+              <b>Timing Attack:</b> Measures decryption time to deduce the
+              private key value.
+            </div>
+          </div>
+          <div class="point-item" style="grid-column: 1/-1; border-right: none">
+            <span class="point-num">7</span
+            ><span class="point-title"
+              >Comparison: Secret Key vs Public Key</span
+            >
+            <div class="point-body">
+              Secret key: Fast, 1 key, hard to distribute. Public key: Slow, 2
+              keys, easy to distribute. <b>In practice:</b> HTTPS uses both —
+              RSA/DH to exchange AES key, then AES for all data.
+            </div>
+          </div>
+        </div>
+        <div class="real-life-section">
+          <div class="real-life-title">
+            🌍 REAL-LIFE EXAMPLES — Public Key Cryptography
+          </div>
+          <div class="example-row">
+            <div class="example-card">
+              <span class="ex-icon">🔒</span>
+              <div class="ex-concept">RSA — HDFC Netbanking</div>
+              <div class="ex-text">
+                When you open https://netbanking.hdfcbank.com, your browser uses
+                RSA-2048 to verify HDFC's digital certificate before trusting
+                the connection — preventing fake bank websites.
+              </div>
+            </div>
+            <div class="example-card">
+              <span class="ex-icon">📱</span>
+              <div class="ex-concept">ECC — Signal Messenger</div>
+              <div class="ex-text">
+                Signal uses ECC (Curve25519) for key exchange. Its small key
+                size means your phone's battery lasts much longer while
+                maintaining stronger security than RSA.
+              </div>
+            </div>
+            <div class="example-card">
+              <span class="ex-icon">🌐</span>
+              <div class="ex-concept">Diffie-Hellman — Gmail</div>
+              <div class="ex-text">
+                Every time you open Gmail, Diffie-Hellman key exchange happens
+                in milliseconds — creating a unique session key for that
+                connection only. Each session is independently secure.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- UNIT III -->
+      <div class="unit-header" style="margin-top: 25px">
+        <div class="unit-num">III</div>
+        <div>
+          <div class="unit-title">
+            Integrity, Authentication & Non-Repudiation
+          </div>
+          <div class="unit-sub">
+            MD5 • SHA • MAC • HMAC • Digital Signatures • RSA • DSA • Biometrics
+          </div>
+        </div>
+        <div class="marks-badge">14 Marks</div>
+      </div>
+      <div class="topic-container">
+        <div class="topic-header t1">
+          ⭐ TOPIC 1: Hash Functions and MAC
+          <span class="topic-marks">7 Marks</span>
+        </div>
+        <div class="points-grid">
+          <div class="point-item">
+            <span class="point-num">1</span
+            ><span class="point-title">Hash Function Definition</span>
+            <div class="point-body">
+              Takes any-length input → produces fixed-length output (digest).
+              One-way function — cannot reverse it. Same input always gives same
+              hash output.
+            </div>
+          </div>
+          <div class="point-item">
+            <span class="point-num">2</span
+            ><span class="point-title">Properties of Hash Functions</span>
+            <div class="point-body">
+              <b>Pre-image Resistance:</b> Can't find input from hash.
+              <b>Collision Resistance:</b> No two inputs share same hash.
+              <b>Avalanche Effect:</b> Tiny change in input = completely
+              different hash.
+            </div>
+          </div>
+          <div class="point-item">
+            <span class="point-num">3</span
+            ><span class="point-title">MD5 (Message Digest 5)</span>
+            <div class="point-body">
+              Produces 128-bit hash. Processes 512-bit blocks through 4 rounds ×
+              16 operations. Now broken — collision attacks found. No longer
+              safe for security applications.
+            </div>
+          </div>
+          <div class="point-item">
+            <span class="point-num">4</span
+            ><span class="point-title">SHA (Secure Hash Algorithm)</span>
+            <div class="point-body">
+              SHA-1: 160 bits (weak). SHA-256: 256 bits. SHA-512: 512 bits.
+              Stronger than MD5. Used in SSL/TLS certificates, digital
+              signatures, and Bitcoin blockchain.
+            </div>
+          </div>
+          <div class="point-item">
+            <span class="point-num">5</span
+            ><span class="point-title">MAC (Message Authentication Code)</span>
+            <div class="point-body">
+              Hash of (message + secret key). Receiver recomputes MAC and
+              compares. Matching MAC confirms BOTH integrity AND authenticity —
+              two-in-one check.
+            </div>
+          </div>
+          <div class="point-item">
+            <span class="point-num">6</span
+            ><span class="point-title">HMAC (Hash-based MAC)</span>
+            <div class="point-body">
+              Hash + secret key combined per RFC 2104 standard. Mathematically
+              stronger than plain MAC. Used in SSL, TLS, SSH, and IPSec for
+              authentication.
+            </div>
+          </div>
+          <div class="point-item" style="grid-column: 1/-1; border-right: none">
+            <span class="point-num">7</span
+            ><span class="point-title">Difference: Hash vs MAC</span>
+            <div class="point-body">
+              <b>Hash:</b> No key needed, integrity only, can be forged.
+              <b>MAC:</b> Secret key required, integrity + authentication,
+              cannot be forged without the key. <b>Use Hash for:</b> password
+              storage. <b>Use MAC for:</b> API request signing.
+            </div>
+          </div>
+        </div>
+        <div class="real-life-section">
+          <div class="real-life-title">
+            🌍 REAL-LIFE EXAMPLES — Hash Functions & MAC
+          </div>
+          <div class="example-row">
+            <div class="example-card">
+              <span class="ex-icon">🔑</span>
+              <div class="ex-concept">SHA-256 — Password Storage</div>
+              <div class="ex-text">
+                When you create an account on Flipkart, your password is SHA-256
+                hashed before storage. Even if the database is hacked, only the
+                hash is exposed — your real password stays secret.
+              </div>
+            </div>
+            <div class="example-card">
+              <span class="ex-icon">₿</span>
+              <div class="ex-concept">SHA-256 — Bitcoin</div>
+              <div class="ex-text">
+                Bitcoin uses SHA-256 to secure blockchain. Changing any
+                transaction changes every subsequent block's hash — making
+                tampering computationally impossible for the entire chain.
+              </div>
+            </div>
+            <div class="example-card">
+              <span class="ex-icon">🍕</span>
+              <div class="ex-concept">HMAC — Swiggy API</div>
+              <div class="ex-text">
+                Swiggy's app server communication uses HMAC to verify API
+                requests are genuine. This prevents attackers from sending fake
+                "place order" requests to their servers.
+              </div>
+            </div>
+            <div class="example-card">
+              <span class="ex-icon">⬇️</span>
+              <div class="ex-concept">MD5/SHA — File Download</div>
+              <div class="ex-text">
+                When downloading Ubuntu Linux, the website shows SHA-256
+                checksum. You verify it after download to confirm the 4GB file
+                wasn't corrupted or replaced with malware.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-header t2">
+          ⭐ TOPIC 2: Digital Signatures & Biometric Authentication
+          <span class="topic-marks">7 Marks</span>
+        </div>
+        <div class="points-grid">
+          <div class="point-item">
+            <span class="point-num">1</span
+            ><span class="point-title">Digital Signature Introduction</span>
+            <div class="point-body">
+              Electronic equivalent of handwritten signature. Created by
+              encrypting message hash with private key. Provides Authentication
+              + Integrity + Non-Repudiation simultaneously.
+            </div>
+          </div>
+          <div class="point-item">
+            <span class="point-num">2</span
+            ><span class="point-title">How Digital Signature Works</span>
+            <div class="point-body">
+              <b>Signing:</b> Hash(message) → Encrypt with Private Key → Attach
+              to message. <b>Verification:</b> Decrypt with Public Key → Compare
+              hash → If match = valid, genuine signature.
+            </div>
+          </div>
+          <div class="point-item">
+            <span class="point-num">3</span
+            ><span class="point-title">RSA Digital Signature</span>
+            <div class="point-body">
+              Private key for signing, public key for verification. Based on
+              prime factoring difficulty. Used in SSL certificates, email
+              signing (S/MIME), and software distribution signing.
+            </div>
+          </div>
+          <div class="point-item">
+            <span class="point-num">4</span
+            ><span class="point-title">DSA (Digital Signature Algorithm)</span>
+            <div class="point-body">
+              U.S. NIST Federal standard. Based on discrete logarithm problem.
+              ONLY for signing/verification — cannot encrypt data unlike RSA.
+              Faster signing, slower verification than RSA.
+            </div>
+          </div>
+          <div class="point-item">
+            <span class="point-num">5</span
+            ><span class="point-title">RSA vs DSA Comparison</span>
+            <div class="point-body">
+              RSA: Encryption + Signing, fast verify, slow sign. DSA: Sign only,
+              fast sign, slow verify. Both provide strong non-repudiation. RSA
+              more widely deployed globally.
+            </div>
+          </div>
+          <div class="point-item">
+            <span class="point-num">6</span
+            ><span class="point-title"
+              >Non-Repudiation via Digital Signatures</span
+            >
+            <div class="point-body">
+              Only sender holds private key → only they could create that
+              signature. Legally binding under IT Act 2000, India. Courts accept
+              as valid legal evidence.
+            </div>
+          </div>
+          <div class="point-item" style="grid-column: 1/-1; border-right: none">
+            <span class="point-num">7</span
+            ><span class="point-title">Biometric Authentication</span>
+            <div class="point-body">
+              <b>Physiological:</b> Fingerprint, iris scan, facial recognition,
+              retina scan, hand geometry. <b>Behavioral:</b> Voice recognition,
+              typing rhythm, gait analysis. Cannot be lost, stolen, or forgotten
+              unlike passwords. Used in banking, passports, access control,
+              border control.
+            </div>
+          </div>
+        </div>
+        <div class="real-life-section">
+          <div class="real-life-title">
+            🌍 REAL-LIFE EXAMPLES — Digital Signatures & Biometrics
+          </div>
+          <div class="example-row">
+            <div class="example-card">
+              <span class="ex-icon">📋</span>
+              <div class="ex-concept">DSig — Aadhaar eSign</div>
+              <div class="ex-text">
+                UIDAI's Aadhaar eSign service lets Indians sign contracts, loan
+                documents, and tax returns digitally. IT Act 2000 makes these
+                signatures legally equivalent to physical ink signatures.
+              </div>
+            </div>
+            <div class="example-card">
+              <span class="ex-icon">🛂</span>
+              <div class="ex-concept">Biometric — Hyderabad Airport</div>
+              <div class="ex-text">
+                Hyderabad Airport's e-gate uses iris and facial recognition for
+                immigration clearance. The same biometric data is stored in the
+                chip of Indian e-Passports, eliminating long queues.
+              </div>
+            </div>
+            <div class="example-card">
+              <span class="ex-icon">💰</span>
+              <div class="ex-concept">Biometric — PhonePe Payment</div>
+              <div class="ex-text">
+                PhonePe fingerprint payment stores the fingerprint template ONLY
+                inside your phone's secure enclave — it never travels to PhonePe
+                servers, making it extremely secure.
+              </div>
+            </div>
+            <div class="example-card">
+              <span class="ex-icon">💻</span>
+              <div class="ex-concept">DSig — Windows Updates</div>
+              <div class="ex-text">
+                Every Windows Update is digitally signed by Microsoft using RSA.
+                Windows verifies the signature before installing — if tampered,
+                it shows "Publisher cannot be verified" warning.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- UNIT IV -->
+      <div class="unit-header" style="margin-top: 25px">
+        <div class="unit-num">IV</div>
+        <div>
+          <div class="unit-title">PKI Interface & Smart Cards</div>
+          <div class="unit-sub">
+            Digital Certificates • CA • Firewalls • VPN • Smart Cards • Zero
+            Knowledge Protocols
+          </div>
+        </div>
+        <div class="marks-badge">14 Marks</div>
+      </div>
+      <div class="topic-container">
+        <div class="topic-header t1">
+          ⭐ TOPIC 1: PKI, Firewalls and VPN
+          <span class="topic-marks">7 Marks</span>
+        </div>
+        <div class="points-grid">
+          <div class="point-item">
+            <span class="point-num">1</span
+            ><span class="point-title">PKI (Public Key Infrastructure)</span>
+            <div class="point-body">
+              Complete framework of hardware, software, policies to create,
+              manage, distribute, and revoke digital certificates. Enables
+              secure exchange over the internet using public key cryptography.
+            </div>
+          </div>
+          <div class="point-item">
+            <span class="point-num">2</span
+            ><span class="point-title">Digital Certificates</span>
+            <div class="point-body">
+              Electronic document binding public key to identity. Contains:
+              owner name, public key, CA name, serial number, validity dates,
+              CA's digital signature. Issued by trusted Certificate Authority.
+            </div>
+          </div>
+          <div class="point-item">
+            <span class="point-num">3</span
+            ><span class="point-title">Certifying Authorities (CA)</span>
+            <div class="point-body">
+              Trusted third-party that verifies identities and issues
+              certificates. Verifies applicant with legal documents before
+              issuing. Examples: DigiCert, VeriSign, Let's Encrypt, India's
+              eMudhra.
+            </div>
+          </div>
+          <div class="point-item">
+            <span class="point-num">4</span
+            ><span class="point-title"
+              >Certificate Chain & Trust Hierarchy</span
+            >
+            <div class="point-body">
+              Root CA → Intermediate CA → End Entity Certificate. Browsers have
+              pre-installed trusted Root CA list. Certificate chain verified
+              bottom-up through digital signatures at each level.
+            </div>
+          </div>
+          <div class="point-item">
+            <span class="point-num">5</span
+            ><span class="point-title"
+              >POP Key Interface (Proof of Possession)</span
+            >
+            <div class="point-body">
+              Proves entity truly holds the private key matching their
+              certificate's public key. Prevents identity theft — someone cannot
+              claim another person's public key as their own.
+            </div>
+          </div>
+          <div class="point-item">
+            <span class="point-num">6</span
+            ><span class="point-title">Firewalls</span>
+            <div class="point-body">
+              Monitors and controls all incoming/outgoing traffic based on
+              rules. <b>Packet Filtering:</b> Checks headers.
+              <b>Stateful Inspection:</b> Tracks connections.
+              <b>Application Layer:</b> Inspects content for attacks.
+            </div>
+          </div>
+          <div class="point-item" style="grid-column: 1/-1; border-right: none">
+            <span class="point-num">7</span
+            ><span class="point-title">VPN (Virtual Private Network)</span>
+            <div class="point-body">
+              Creates encrypted tunnel over public internet. All data in the
+              tunnel is protected from eavesdroppers. Protocols: IPSec (network
+              layer), SSL/TLS (browser-based), PPTP. Used for remote work and
+              connecting geographically dispersed offices securely.
+            </div>
+          </div>
+        </div>
+        <div class="real-life-section">
+          <div class="real-life-title">
+            🌍 REAL-LIFE EXAMPLES — PKI, Firewalls, VPN
+          </div>
+          <div class="example-row">
+            <div class="example-card">
+              <span class="ex-icon">🌐</span>
+              <div class="ex-concept">PKI — Browser HTTPS Lock</div>
+              <div class="ex-text">
+                The 🔒 padlock in Chrome means that website's certificate was
+                verified through a PKI chain: Website Cert → Intermediate CA →
+                Root CA → pre-trusted in your browser.
+              </div>
+            </div>
+            <div class="example-card">
+              <span class="ex-icon">🏛️</span>
+              <div class="ex-concept">CA — India's CCA</div>
+              <div class="ex-text">
+                India's Controller of Certifying Authorities (CCA) under IT Act
+                2000 licenses eMudhra, (n)Code Solutions, and NSDL as official
+                CAs for issuing digital certificates to Indian citizens.
+              </div>
+            </div>
+            <div class="example-card">
+              <span class="ex-icon">🛡️</span>
+              <div class="ex-concept">Firewall — IT Companies</div>
+              <div class="ex-text">
+                Infosys, Wipro, and TCS use Cisco ASA and Palo Alto firewalls to
+                block employee access to social media during office hours and to
+                prevent confidential data from being emailed outside.
+              </div>
+            </div>
+            <div class="example-card">
+              <span class="ex-icon">🏠</span>
+              <div class="ex-concept">VPN — Work From Home</div>
+              <div class="ex-text">
+                During COVID-19, millions of IT employees used Cisco AnyConnect
+                VPN to securely access office SAP systems, code repositories,
+                and internal HR portals from home networks.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-header t2">
+          ⭐ TOPIC 2: Smart Cards & Zero Knowledge Protocols
+          <span class="topic-marks">7 Marks</span>
+        </div>
+        <div class="points-grid">
+          <div class="point-item">
+            <span class="point-num">1</span
+            ><span class="point-title">Smart Card Introduction</span>
+            <div class="point-body">
+              Portable plastic card with embedded tamper-resistant
+              microprocessor chip. Stores data, executes programs, and performs
+              cryptographic operations securely on the chip itself.
+            </div>
+          </div>
+          <div class="point-item">
+            <span class="point-num">2</span
+            ><span class="point-title"
+              >Application Security via Smart Cards</span
+            >
+            <div class="point-body">
+              Private key stored inside chip — NEVER leaves the card. All crypto
+              operations (signing, decryption) done on-card. Two-factor
+              authentication: Something you have (card) + Something you know
+              (PIN).
+            </div>
+          </div>
+          <div class="point-item">
+            <span class="point-num">3</span
+            ><span class="point-title">Zero Knowledge Protocol Definition</span>
+            <div class="point-body">
+              Prover proves knowledge of a secret to Verifier WITHOUT revealing
+              the secret. Verifier gains full confidence but learns absolutely
+              nothing about the actual secret value.
+            </div>
+          </div>
+          <div class="point-item">
+            <span class="point-num">4</span
+            ><span class="point-title">Zero Knowledge — Working Steps</span>
+            <div class="point-body">
+              1) Prover commits to random value. 2) Verifier sends challenge. 3)
+              Prover responds using challenge + secret. 4) Verifier checks
+              mathematical consistency. 5) Repeat many times until confident.
+            </div>
+          </div>
+          <div class="point-item">
+            <span class="point-num">5</span
+            ><span class="point-title">Zero Knowledge in Smart Cards</span>
+            <div class="point-body">
+              Card proves PIN knowledge without transmitting actual PIN over the
+              network. Prevents eavesdroppers from capturing credentials.
+              Mathematical proof replaces direct PIN transmission.
+            </div>
+          </div>
+          <div class="point-item">
+            <span class="point-num">6</span
+            ><span class="point-title">Attacks on Smart Cards</span>
+            <div class="point-body">
+              <b>Side Channel:</b> Monitor power/EM emissions to extract keys.
+              <b>Fault Injection:</b> Voltage glitches to bypass security.
+              <b>Reverse Engineering:</b> Physically dissect chip under
+              microscope. <b>Replay:</b> Retransmit captured auth messages.
+            </div>
+          </div>
+          <div class="point-item" style="grid-column: 1/-1; border-right: none">
+            <span class="point-num">7</span
+            ><span class="point-title"
+              >Protection Against Smart Card Attacks</span
+            >
+            <div class="point-body">
+              Tamper-resistant hardware packaging prevents physical access.
+              Encrypted chip storage prevents reverse engineering. Auto-lockout
+              after 3 failed PINs prevents brute force. Power consumption
+              randomization defeats side-channel attacks. Session timestamps
+              prevent replay attacks.
+            </div>
+          </div>
+        </div>
+        <div class="real-life-section">
+          <div class="real-life-title">🌍 REAL-LIFE EXAMPLES — Smart Cards</div>
+          <div class="example-row">
+            <div class="example-card">
+              <span class="ex-icon">💳</span>
+              <div class="ex-concept">EMV Chip — SBI/HDFC Card</div>
+              <div class="ex-text">
+                Your bank's Visa/Mastercard chip (EMV) generates a unique
+                cryptogram for EVERY transaction. Unlike the old magnetic
+                stripe, it cannot be cloned — even if the merchant's terminal is
+                compromised.
+              </div>
+            </div>
+            <div class="example-card">
+              <span class="ex-icon">📱</span>
+              <div class="ex-concept">SIM Card — Jio/Airtel</div>
+              <div class="ex-text">
+                Your SIM is a smart card storing your IMSI and encryption keys.
+                When you call, the SIM and tower do a challenge-response
+                authentication to verify you're a legitimate subscriber.
+              </div>
+            </div>
+            <div class="example-card">
+              <span class="ex-icon">🪪</span>
+              <div class="ex-concept">e-Passport — India 2021</div>
+              <div class="ex-text">
+                Indian e-Passports issued from 2021 contain a smart chip storing
+                fingerprint and facial biometrics, digitally signed by the
+                Government of India CA — preventing forgery completely.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- UNIT V -->
+      <div class="unit-header" style="margin-top: 25px">
+        <div class="unit-num">V</div>
+        <div>
+          <div class="unit-title">Network Security Applications</div>
+          <div class="unit-sub">
+            Kerberos • SSL • IPSec • E-Cash • SET • Micro Payments • .NET • J2EE
+          </div>
+        </div>
+        <div class="marks-badge">14 Marks</div>
+      </div>
+      <div class="topic-container">
+        <div class="topic-header t1">
+          ⭐ TOPIC 1: Kerberos, SSL, IPSec & Electronic Payments
+          <span class="topic-marks">7 Marks</span>
+        </div>
+        <div class="points-grid">
+          <div class="point-item">
+            <span class="point-num">1</span
+            ><span class="point-title">Kerberos Protocol</span>
+            <div class="point-body">
+              Network authentication using symmetric key cryptography + trusted
+              Key Distribution Center (KDC). Developed at MIT. Provides mutual
+              authentication — both client and server verified.
+            </div>
+          </div>
+          <div class="point-item">
+            <span class="point-num">2</span
+            ><span class="point-title">Kerberos Working Steps</span>
+            <div class="point-body">
+              Client→AS: Request. AS→Client: TGT(encrypted). Client→TGS:
+              TGT+Service request. TGS→Client: Service Ticket. Client→Server:
+              Service Ticket → Access Granted. Single sign-on concept.
+            </div>
+          </div>
+          <div class="point-item">
+            <span class="point-num">3</span
+            ><span class="point-title">SSL (Secure Sockets Layer)</span>
+            <div class="point-body">
+              Secures browser-server communication using symmetric + asymmetric
+              cryptography. Operates between Transport and Application layers.
+              Provides server authentication, data encryption, data integrity.
+            </div>
+          </div>
+          <div class="point-item">
+            <span class="point-num">4</span
+            ><span class="point-title">SSL Handshake Process</span>
+            <div class="point-body">
+              ClientHello → ServerHello + Certificate → Client verifies
+              certificate → Pre-master secret sent → Both derive session key →
+              Encrypted communication begins. Completes in milliseconds.
+            </div>
+          </div>
+          <div class="point-item">
+            <span class="point-num">5</span
+            ><span class="point-title">IPSec (Internet Protocol Security)</span>
+            <div class="point-body">
+              Secures at IP layer. <b>Transport Mode:</b> Encrypts payload only.
+              <b>Tunnel Mode:</b> Encrypts entire packet (VPNs).
+              <b>AH protocol:</b> Auth only, no encryption.
+              <b>ESP protocol:</b> Auth + full encryption.
+            </div>
+          </div>
+          <div class="point-item">
+            <span class="point-num">6</span
+            ><span class="point-title">Electronic Payments & E-Cash</span>
+            <div class="point-body">
+              <b>E-Payments:</b> Digital transfers via cards/wallets secured by
+              SSL/TLS. <b>E-Cash:</b> Anonymous digital currency using blind
+              digital signatures. Bitcoin, CBDCs are modern implementations.
+            </div>
+          </div>
+          <div class="point-item" style="grid-column: 1/-1; border-right: none">
+            <span class="point-num">7</span
+            ><span class="point-title">Micro Payments</span>
+            <div class="point-body">
+              Very small payments (under ₹1 or $1) for individual digital
+              content items. Traditional card systems have high overhead making
+              micro payments uneconomical. <b>PayWord:</b> Hash chain based.
+              <b>MicroMint:</b> Computational puzzle based. Used for articles,
+              music tracks, in-game items, content tips.
+            </div>
+          </div>
+        </div>
+        <div class="real-life-section">
+          <div class="real-life-title">
+            🌍 REAL-LIFE EXAMPLES — Kerberos, SSL, IPSec, Payments
+          </div>
+          <div class="example-row">
+            <div class="example-card">
+              <span class="ex-icon">🖥️</span>
+              <div class="ex-concept">Kerberos — Office Login</div>
+              <div class="ex-text">
+                When you log into an Infosys/TCS domain computer, Kerberos
+                authenticates you to the Domain Controller (KDC). One login
+                gives you service tickets for file servers, email, SAP — no
+                separate passwords needed.
+              </div>
+            </div>
+            <div class="example-card">
+              <span class="ex-icon">🔒</span>
+              <div class="ex-concept">TLS — Internet Banking</div>
+              <div class="ex-text">
+                https://netbanking.hdfcbank.com uses TLS 1.3 (successor of SSL).
+                Click the 🔒 padlock to see: TLS version, cipher suite, and
+                certificate details proving the connection is authenticated and
+                encrypted.
+              </div>
+            </div>
+            <div class="example-card">
+              <span class="ex-icon">🌐</span>
+              <div class="ex-concept">IPSec — Corporate WAN</div>
+              <div class="ex-text">
+                TCS connects its Hyderabad and Mumbai offices using IPSec Tunnel
+                Mode VPN. All inter-office traffic — SAP transactions, code
+                commits, emails — is encrypted at the IP layer invisibly.
+              </div>
+            </div>
+            <div class="example-card">
+              <span class="ex-icon">₿</span>
+              <div class="ex-concept">Micro Payments — Brave Browser</div>
+              <div class="ex-text">
+                Brave Browser pays content creators in BAT cryptocurrency as
+                micro payments (fractions of a cent) when users view their ads —
+                enabled by blockchain-based Lightning Network payment channels.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-header t2">
+          ⭐ TOPIC 2: SET Protocol & Enterprise Security
+          <span class="topic-marks">7 Marks</span>
+        </div>
+        <div class="points-grid">
+          <div class="point-item">
+            <span class="point-num">1</span
+            ><span class="point-title">SET Introduction</span>
+            <div class="point-body">
+              Secure Electronic Transaction — jointly developed by Visa and
+              MasterCard. Secures online credit card payments. Core principle:
+              Merchant NEVER sees actual card details.
+            </div>
+          </div>
+          <div class="point-item">
+            <span class="point-num">2</span
+            ><span class="point-title">SET Components</span>
+            <div class="point-body">
+              Cardholder, Merchant, Payment Gateway, Certificate Authority,
+              Issuer Bank (cardholder's bank), Acquirer Bank (merchant's bank).
+              ALL parties hold digital certificates for authentication.
+            </div>
+          </div>
+          <div class="point-item">
+            <span class="point-num">3</span
+            ><span class="point-title">SET Transaction Process</span>
+            <div class="point-body">
+              Select items → Create dual-signed order → Merchant gets order only
+              → Gateway gets payment only → Bank authorizes → Confirmation sent
+              back. Payment details encrypted for gateway, not merchant.
+            </div>
+          </div>
+          <div class="point-item">
+            <span class="point-num">4</span
+            ><span class="point-title">SET Dual Signature</span>
+            <div class="point-body">
+              Customer creates two messages — order (for merchant) + payment
+              (for bank) — linked by hash. Merchant cannot see payment details.
+              Bank cannot see order details. Privacy protected for both.
+            </div>
+          </div>
+          <div class="point-item">
+            <span class="point-num">5</span
+            ><span class="point-title">.NET Security Framework</span>
+            <div class="point-body">
+              Code Access Security (CAS), Role-Based Security, built-in
+              AES/RSA/SHA/HMAC/X.509 classes, SslStream for encrypted
+              communication. Used for building enterprise-grade secure Windows
+              applications.
+            </div>
+          </div>
+          <div class="point-item">
+            <span class="point-num">6</span
+            ><span class="point-title">J2EE Security</span>
+            <div class="point-body">
+              JAAS (Java Authentication Authorization Service), Declarative
+              Security (web.xml configs), Programmatic Security (runtime API
+              checks). Supports full CIA triad + Non-Repudiation for Java
+              enterprise apps.
+            </div>
+          </div>
+          <div class="point-item" style="grid-column: 1/-1; border-right: none">
+            <span class="point-num">7</span
+            ><span class="point-title"
+              >Enterprise Security — Defense in Depth</span
+            >
+            <div class="point-body">
+              <b>Layer 1:</b> Firewalls + IDS/IPS at perimeter.
+              <b>Layer 2:</b> VPNs + network segmentation. <b>Layer 3:</b> WAF +
+              Secure Coding (input validation, SQL injection prevention).
+              <b>Layer 4:</b> Database encryption + data masking.
+              <b>Layer 5:</b> MFA + PKI + privileged access management. Regular
+              penetration testing + documented Incident Response Plan required.
+            </div>
+          </div>
+        </div>
+        <div class="real-life-section">
+          <div class="real-life-title">
+            🌍 REAL-LIFE EXAMPLES — SET & Enterprise Security
+          </div>
+          <div class="example-row">
+            <div class="example-card">
+              <span class="ex-icon">🛒</span>
+              <div class="ex-concept">SET Concept — Amazon Pay</div>
+              <div class="ex-text">
+                When you buy on Amazon using Visa, your card number goes
+                directly encrypted to the payment gateway (Razorpay/PayU) —
+                Amazon's servers never see your actual 16-digit card number.
+                This is SET's core principle.
+              </div>
+            </div>
+            <div class="example-card">
+              <span class="ex-icon">🏦</span>
+              <div class="ex-concept">Enterprise — SBI Security</div>
+              <div class="ex-text">
+                SBI uses 5-layer defense: Cisco firewalls → Network IDS → Web
+                Application Firewall → HSM (Hardware Security Module) for key
+                storage → Biometric access to data centers. RBI mandates annual
+                security audits.
+              </div>
+            </div>
+            <div class="example-card">
+              <span class="ex-icon">☕</span>
+              <div class="ex-concept">J2EE — ICICI Banking</div>
+              <div class="ex-text">
+                ICICI Bank's internet banking backend runs on J2EE with JAAS
+                authentication. Role-based security ensures tellers can only
+                view accounts, while branch managers can approve large fund
+                transfers.
+              </div>
+            </div>
+            <div class="example-card">
+              <span class="ex-icon">💻</span>
+              <div class="ex-concept">.NET — IRCTC</div>
+              <div class="ex-text">
+                IRCTC uses .NET security framework with role-based access —
+                railway admins can add new trains and routes, while regular
+                users can only book tickets. Code Access Security prevents
+                unauthorized operations.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- COMPARISON TABLES -->
+      <div
+        style="
+          background: white;
+          border-radius: 12px;
+          margin-top: 25px;
+          padding: 18px;
+          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        "
+      >
+        <h3
+          style="
+            color: #1a237e;
+            font-size: 15px;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #ff6f00;
+          "
+        >
+          📊 Key Comparison Tables
+        </h3>
+        <p style="font-weight: 700; color: #1a237e; margin: 12px 0 6px">
+          DES vs Triple DES vs AES
+        </p>
+        <table class="comp-table">
+          <tr>
+            <th>Feature</th>
+            <th>DES</th>
+            <th>Triple DES</th>
+            <th>AES</th>
+          </tr>
+          <tr>
+            <td>Key Length</td>
+            <td>56 bits</td>
+            <td>168 bits</td>
+            <td>128/192/256 bits</td>
+          </tr>
+          <tr>
+            <td>Block Size</td>
+            <td>64 bits</td>
+            <td>64 bits</td>
+            <td>128 bits</td>
+          </tr>
+          <tr>
+            <td>Speed</td>
+            <td>Fast</td>
+            <td>Very Slow</td>
+            <td>Very Fast</td>
+          </tr>
+          <tr>
+            <td>Security</td>
+            <td>Broken</td>
+            <td>Moderate</td>
+            <td>Very Strong</td>
+          </tr>
+          <tr>
+            <td>Status</td>
+            <td>Deprecated</td>
+            <td>Legacy</td>
+            <td>Current Standard</td>
+          </tr>
+          <tr>
+            <td>Real Life Use</td>
+            <td>None (obsolete)</td>
+            <td>Old ATM PIN</td>
+            <td>WiFi, WhatsApp, Drives</td>
+          </tr>
+        </table>
+        <p style="font-weight: 700; color: #1a237e; margin: 12px 0 6px">
+          RSA vs ECC vs Diffie-Hellman
+        </p>
+        <table class="comp-table">
+          <tr>
+            <th>Feature</th>
+            <th>RSA</th>
+            <th>ECC</th>
+            <th>Diffie-Hellman</th>
+          </tr>
+          <tr>
+            <td>Purpose</td>
+            <td>Encryption + Signing</td>
+            <td>Encryption + Signing</td>
+            <td>Key Exchange Only</td>
+          </tr>
+          <tr>
+            <td>Security Basis</td>
+            <td>Integer Factorization</td>
+            <td>Elliptic Curve DLP</td>
+            <td>Discrete Log Problem</td>
+          </tr>
+          <tr>
+            <td>Key Size</td>
+            <td>2048-4096 bits</td>
+            <td>256-521 bits</td>
+            <td>2048 bits</td>
+          </tr>
+          <tr>
+            <td>Best For</td>
+            <td>Web Servers, SSL</td>
+            <td>Mobile, IoT</td>
+            <td>Key Agreement (TLS)</td>
+          </tr>
+          <tr>
+            <td>Real Life</td>
+            <td>HDFC HTTPS</td>
+            <td>Signal App</td>
+            <td>Every HTTPS session</td>
+          </tr>
+        </table>
+        <p style="font-weight: 700; color: #1a237e; margin: 12px 0 6px">
+          SSL/TLS vs IPSec
+        </p>
+        <table class="comp-table">
+          <tr>
+            <th>Feature</th>
+            <th>SSL/TLS</th>
+            <th>IPSec</th>
+          </tr>
+          <tr>
+            <td>OSI Layer</td>
+            <td>Application Layer</td>
+            <td>Network Layer</td>
+          </tr>
+          <tr>
+            <td>Protects</td>
+            <td>Specific applications</td>
+            <td>All IP traffic</td>
+          </tr>
+          <tr>
+            <td>Configuration</td>
+            <td>Easy (browser auto)</td>
+            <td>Complex (manual setup)</td>
+          </tr>
+          <tr>
+            <td>Modes</td>
+            <td>One mode</td>
+            <td>Transport + Tunnel Mode</td>
+          </tr>
+          <tr>
+            <td>Real Example</td>
+            <td>HDFC Netbanking HTTPS</td>
+            <td>Infosys WAN VPN</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="section-divider"></div>
+
+      <!-- ============ ROMAN TELUGU ============ -->
+      <h2
+        style="
+          text-align: center;
+          font-size: 18px;
+          padding: 13px;
+          background: linear-gradient(90deg, #880e4f, #c2185b);
+          color: white;
+          border-radius: 10px;
+          margin-bottom: 18px;
+          letter-spacing: 3px;
+        "
+      >
+        ═══ ROMAN TELUGU MEDIUM ═══
+      </h2>
+
+      <!-- UNIT I TELUGU -->
+      <div class="telugu-section">
+        <div class="telugu-header">
+          🔐 UNIT I — Network Security Parichayam (14 Marks)
+        </div>
+        <div class="telugu-unit">
+          <div class="telugu-unit-header">
+            ★ TOPIC 1: Security Lakshanalu — 7 Marks
+          </div>
+          <div class="telugu-point">
+            <div class="telugu-point-title">
+              1. Integrity (Maarpu Leni Sthithi) — Real: UPI Transfer
+            </div>
+            <div class="telugu-point-body">
+              Data pampinappudu contents marchakoodadu. Real life: UPI lo
+              ₹10,000 pampisthe bank checksum use chesataadi amount ₹1,00,000
+              kaakunda ensure chestundi.
+            </div>
+          </div>
+          <div class="telugu-point">
+            <div class="telugu-point-title">
+              2. Authenticity (Nijaayitiyata) — Real: Gmail Verified Badge
+            </div>
+            <div class="telugu-point-body">
+              Pampina vaadi gurtimpu verify cheyyadam. Real life: Gmail bank
+              emails pai ✓ verified badge show chestundi — fake email ni
+              gurtistundi.
+            </div>
+          </div>
+          <div class="telugu-point">
+            <div class="telugu-point-title">
+              3. Non-Repudiation — Real: Aadhaar eSign
+            </div>
+            <div class="telugu-point-body">
+              Message pampin taruvata deny cheyyaledu. Real life: Aadhaar eSign
+              tho loan documents sign chesthe court lo valid — "Naanu sign
+              cheyyledu" ani cheppaledu.
+            </div>
+          </div>
+          <div class="telugu-point">
+            <div class="telugu-point-title">
+              4. Confidentiality — Real: WhatsApp E2E
+            </div>
+            <div class="telugu-point-body">
+              Unauthorized vaallaki telusundakoodadu. Real life: WhatsApp
+              end-to-end encryption — server kuda chadduvagalyadu, kevalam meeru
+              mariyu receiver matrame.
+            </div>
+          </div>
+          <div class="telugu-point">
+            <div class="telugu-point-title">
+              5. Authorization — Real: Company File Access
+            </div>
+            <div class="telugu-point-body">
+              Permitted users matrame resources access. Real life: TCS lo
+              Finance Manager matrame salary sheets access cheyyagaligitundi,
+              regular employees "Access Denied" vastundi.
+            </div>
+          </div>
+          <div class="telugu-point">
+            <div class="telugu-point-title">
+              6. Anonymity — Real: Tor Browser
+            </div>
+            <div class="telugu-point-body">
+              Identity daachukovalani. Real life: Tor Browser use chese
+              journalism lo anonymous ga internet use cheyyavachu — government
+              trace cheyyataniki kashtam.
+            </div>
+          </div>
+          <div class="telugu-point">
+            <div class="telugu-point-title">
+              7. Availability — Real: GitHub DDoS 2018
+            </div>
+            <div class="telugu-point-body">
+              System ela samayamlone accessible ga undaali. Real life: 2018 lo
+              GitHub pai 1.35 Tbps DDoS attack — 10 minutes developers worldwide
+              access cheyyalekapoyaaru.
+            </div>
+          </div>
+        </div>
+        <div class="telugu-unit">
+          <div class="telugu-unit-header">
+            ★ TOPIC 2: Daadula Rakamulu mariyu Threats — 7 Marks
+          </div>
+          <div class="telugu-point">
+            <div class="telugu-point-title">
+              1. DoS Attack — Real: GitHub DDoS 2018
+            </div>
+            <div class="telugu-point-body">
+              Massive fake requests tho server overload. CPU bandwidth exhaust.
+              Real life: 2018 GitHub 1.35 Tbps flood — world largest DDoS ever,
+              10 minutes offline.
+            </div>
+          </div>
+          <div class="telugu-point">
+            <div class="telugu-point-title">
+              2. IP Spoofing — Real: Fake Airport WiFi
+            </div>
+            <div class="telugu-point-body">
+              Source IP fake chesataadi identity daachukoontaadu. Real life:
+              Hakkers "Free Airport WiFi" pettataaru — connect aina travelers
+              passwords anni capture chesataaru.
+            </div>
+          </div>
+          <div class="telugu-point">
+            <div class="telugu-point-title">
+              3. Replay Attack — Real: OTP Reuse Prevention
+            </div>
+            <div class="telugu-point-body">
+              Valid packet capture malli pampisataadu. Real life: Purani systems
+              OTP reuse allow chesaayi — ippudu 30-second expiry tho fix
+              chesaaru replay prevent cheyataniki.
+            </div>
+          </div>
+          <div class="telugu-point">
+            <div class="telugu-point-title">
+              4. Man-in-the-Middle — Real: Cafe WiFi Hacking
+            </div>
+            <div class="telugu-point-body">
+              Rendu parties madhya secretly position. Real life: Coffee shop
+              WiFi lo hacker MITM chesataadi customers banking passwords real
+              time lo steal chestadu.
+            </div>
+          </div>
+          <div class="telugu-point">
+            <div class="telugu-point-title">
+              5. Worms — Real: WannaCry AP Police 2017
+            </div>
+            <div class="telugu-point-body">
+              Self-replicating, network lo automatically spread. Real life:
+              WannaCry 2017 — AP Police computers included 230,000 computers 150
+              countries lo oka roju lo affect ayyindayi.
+            </div>
+          </div>
+          <div class="telugu-point">
+            <div class="telugu-point-title">
+              6. Viruses — Real: ILOVEYOU 2000
+            </div>
+            <div class="telugu-point-body">
+              Infected program execute ainapudu activate. Real life: ILOVEYOU
+              virus 2000 email dvaara spread ayyindi — $10 billion worldwide
+              damage chesindi.
+            </div>
+          </div>
+          <div class="telugu-point">
+            <div class="telugu-point-title">
+              7. Trojans — Real: Zeus Banking Trojan
+            </div>
+            <div class="telugu-point-body">
+              Useful la kaanipistundi secretly harm. Real life: Zeus Trojan PDF
+              reader la appear — millions banking credentials steal chesindi
+              worldwide.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- UNIT II TELUGU -->
+      <div class="telugu-section" style="margin-top: 18px">
+        <div class="telugu-header">🔑 UNIT II — Cryptography (14 Marks)</div>
+        <div class="telugu-unit">
+          <div class="telugu-unit-header">
+            ★ TOPIC 1: Secret Key Cryptography — 7 Marks
+          </div>
+          <div class="telugu-point">
+            <div class="telugu-point-title">
+              1. Parichayam — Real: WiFi Password
+            </div>
+            <div class="telugu-point-body">
+              Encryption decryption renditiki same key. Symmetric cryptography.
+              Real life: Home WiFi password enter chesina appudu aaaa password
+              AES symmetric key ga work avutundi.
+            </div>
+          </div>
+          <div class="telugu-point">
+            <div class="telugu-point-title">
+              2. DES — Real: Purani ATM Machines
+            </div>
+            <div class="telugu-point-body">
+              56-bit key, 64-bit blocks, 16 rounds. Ippudu weak. Real life:
+              1990s Indian ATMs DES vaadinchi PIN encrypt chesaayi — ippudu
+              completely replaced by AES.
+            </div>
+          </div>
+          <div class="telugu-point">
+            <div class="telugu-point-title">
+              3. Triple DES — Real: Legacy Bank Systems
+            </div>
+            <div class="telugu-point-body">
+              K1 Encrypt, K2 Decrypt, K3 Encrypt. 168-bit effective. Real life:
+              Older HDFC ATM systems 3DES vaadinchi PIN blocks bank server ki
+              pampisaayi — now AES replaced.
+            </div>
+          </div>
+          <div class="telugu-point">
+            <div class="telugu-point-title">
+              4. AES — Real: WhatsApp, WiFi, BitLocker
+            </div>
+            <div class="telugu-point-body">
+              128/192/256-bit keys. 4x4 state matrix. Real life: WhatsApp
+              messages AES-256, Home WiFi WPA2, Windows BitLocker — anni AES use
+              chestaayi.
+            </div>
+          </div>
+          <div class="telugu-point">
+            <div class="telugu-point-title">
+              5. Key Distribution — Real: Office Kerberos
+            </div>
+            <div class="telugu-point-body">
+              KDC keys manage chestundi. Real life: Office Windows domain lo
+              login chesina appudu Kerberos KDC securely keys distribute
+              chestundi — manual key sharing avasaram ledu.
+            </div>
+          </div>
+          <div class="telugu-point">
+            <div class="telugu-point-title">
+              6. Attacks — Real: DES Brute Force 1999
+            </div>
+            <div class="telugu-point-body">
+              Brute force: anni keys try. Dictionary: common list. Differential
+              Cryptanalysis: plaintext analyze. Real life: 1999 lo DES Key
+              Challenge — 22 hours lo 56-bit DES crack chesaaru, AES ki switch
+              chesaaru.
+            </div>
+          </div>
+          <div class="telugu-point">
+            <div class="telugu-point-title">7. Advantages & Disadvantages</div>
+            <div class="telugu-point-body">
+              Fast, large data suitable. Key distribution problem. Real life:
+              HTTPS both use chestundi — RSA tho AES key exchange, tarvata AES
+              tho data encrypt.
+            </div>
+          </div>
+        </div>
+        <div class="telugu-unit">
+          <div class="telugu-unit-header">
+            ★ TOPIC 2: Public Key Cryptography — 7 Marks
+          </div>
+          <div class="telugu-point">
+            <div class="telugu-point-title">
+              1. Parichayam — Real: Email Certificate
+            </div>
+            <div class="telugu-point-body">
+              Public key (share) + Private key (secret). Real life: Email
+              certificate lo public key andari ki visible, private key mee
+              computer lo matrame untundi.
+            </div>
+          </div>
+          <div class="telugu-point">
+            <div class="telugu-point-title">2. RSA — Real: HDFC Bank HTTPS</div>
+            <div class="telugu-point-body">
+              Prime factoring difficulty pai based. Real life: https://sbi.co.in
+              open chesina appudu browser RSA-2048 use chesataadi bank
+              certificate verify chestundi.
+            </div>
+          </div>
+          <div class="telugu-point">
+            <div class="telugu-point-title">
+              3. ECC — Real: Signal Messenger
+            </div>
+            <div class="telugu-point-body">
+              Elliptic curves, small keys, high security. Real life: Signal
+              Curve25519 ECC use chestundi — mobile battery bachukovalani small
+              key, RSA kaantaa stronger security.
+            </div>
+          </div>
+          <div class="telugu-point">
+            <div class="telugu-point-title">
+              4. Diffie-Hellman — Real: Prathi HTTPS
+            </div>
+            <div class="telugu-point-body">
+              Insecure channel pai shared secret. Discrete log. Real life: Gmail
+              open chesina prathi saari DH key exchange milliseconds lo — unique
+              session key, prathi session independently secure.
+            </div>
+          </div>
+          <div class="telugu-point">
+            <div class="telugu-point-title">
+              5. JCE — Real: Java Banking Apps
+            </div>
+            <div class="telugu-point-body">
+              Cipher, KeyGenerator, MessageDigest classes. Real life: ICICI Bank
+              Java application JCE use chesataadi AES transaction encryption,
+              RSA certificate verification chestundi.
+            </div>
+          </div>
+          <div class="telugu-point">
+            <div class="telugu-point-title">
+              6. Attacks — Real: 512-bit RSA Cracked
+            </div>
+            <div class="telugu-point-body">
+              MITM on DH, Factoring RSA, Timing Attack. Real life: 1999 lo
+              512-bit RSA keys factor chesataadi crack chesaaru — ippudu 2048+
+              bits mandatory.
+            </div>
+          </div>
+          <div class="telugu-point">
+            <div class="telugu-point-title">7. Comparison</div>
+            <div class="telugu-point-body">
+              Secret key: fast, distribution kashtam. Public key: slow, easy
+              distribution. Real life: HTTPS hybrid — RSA tho AES key share, AES
+              tho actual data encrypt. Best of both worlds.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- UNIT III TELUGU -->
+      <div class="telugu-section" style="margin-top: 18px">
+        <div class="telugu-header">
+          🔏 UNIT III — Integrity, Authentication, Non-Repudiation (14 Marks)
+        </div>
+        <div class="telugu-unit">
+          <div class="telugu-unit-header">
+            ★ TOPIC 1: Hash Functions & MAC — 7 Marks
+          </div>
+          <div class="telugu-point">
+            <div class="telugu-point-title">
+              1. Hash Function — Real: Flipkart Password
+            </div>
+            <div class="telugu-point-body">
+              Any input → fixed output. One-way. Real life: Flipkart account
+              create chesina appudu password SHA-256 hash store — database hack
+              ainan original password safe.
+            </div>
+          </div>
+          <div class="telugu-point">
+            <div class="telugu-point-title">
+              2. Properties — Real: Bitcoin Blockchain
+            </div>
+            <div class="telugu-point-body">
+              Pre-image resistance, Collision resistance, Avalanche effect. Real
+              life: Bitcoin lo oka transaction change chesina chaallu — entire
+              chain hash change, tamper impossible.
+            </div>
+          </div>
+          <div class="telugu-point">
+            <div class="telugu-point-title">
+              3. MD5 — Real: File Download Check
+            </div>
+            <div class="telugu-point-body">
+              128-bit, 4 rounds × 16 ops. Broken. Real life: Ubuntu ISO download
+              chesina appudu MD5 checksum verify — corrupt or tampered file
+              gaurtistundi. (MD5 now only for file integrity, not security)
+            </div>
+          </div>
+          <div class="telugu-point">
+            <div class="telugu-point-title">
+              4. SHA — Real: Browser SSL Cert
+            </div>
+            <div class="telugu-point-body">
+              SHA-256: 256-bit. SHA-512: 512-bit. Real life: Meeru browser lo
+              HTTPS padlock click chesina chaallu — certificate SHA-256 sign
+              chesabadindani choostaam.
+            </div>
+          </div>
+          <div class="telugu-point">
+            <div class="telugu-point-title">5. MAC — Real: Swiggy API</div>
+            <div class="telugu-point-body">
+              Message + secret key hash. Real life: Swiggy app requests HMAC tho
+              sign avutaayi — fake "free order" requests prevent cheyataniki
+              server verify chestundi.
+            </div>
+          </div>
+          <div class="telugu-point">
+            <div class="telugu-point-title">6. HMAC — Real: JWT Web Tokens</div>
+            <div class="telugu-point-body">
+              RFC 2104 standard. Stronger. Real life: Web apps JSON Web Tokens
+              HMAC-SHA256 tho sign chestaayi — token tampered ayyindaa verify
+              cheyyataniki login sessions lo.
+            </div>
+          </div>
+          <div class="telugu-point">
+            <div class="telugu-point-title">7. Hash vs MAC Comparison</div>
+            <div class="telugu-point-body">
+              Hash: key ledu, integrity only. MAC: key, integrity+auth. Real
+              life: File download checksum = Hash. API security = HMAC. Banking
+              message auth = HMAC.
+            </div>
+          </div>
+        </div>
+        <div class="telugu-unit">
+          <div class="telugu-unit-header">
+            ★ TOPIC 2: Digital Signatures & Biometrics — 7 Marks
+          </div>
+          <div class="telugu-point">
+            <div class="telugu-point-title">
+              1. Digital Signature — Real: Aadhaar eSign
+            </div>
+            <div class="telugu-point-body">
+              Private key tho hash encrypt.
+              Authentication+Integrity+Non-Repudiation. Real life: IT Act 2000
+              kinda Aadhaar eSign legally valid — loan, tax, contract documents
+              anni.
+            </div>
+          </div>
+          <div class="telugu-point">
+            <div class="telugu-point-title">
+              2. Ela Pani Chestundi — Real: Software Update
+            </div>
+            <div class="telugu-point-body">
+              Sign: Hash→Private key encrypt→Attach. Verify: Public key
+              decrypt→Hash compare→Match→Valid. Real life: Windows Update RSA
+              sign — tampered update install kaakunda protect.
+            </div>
+          </div>
+          <div class="telugu-point">
+            <div class="telugu-point-title">
+              3. RSA Signature — Real: SSL Certificates
+            </div>
+            <div class="telugu-point-body">
+              Private key sign, public key verify. Real life: HDFC Bank SSL
+              certificate RSA digital signature tho sign chesabadindi — browser
+              verify chestundi prathi connection lo.
+            </div>
+          </div>
+          <div class="telugu-point">
+            <div class="telugu-point-title">
+              4. DSA — Real: U.S. Government Docs
+            </div>
+            <div class="telugu-point-body">
+              NIST federal standard. Sign only, not encrypt. Faster signing.
+              Real life: U.S. federal agencies official documents DSA sign
+              chestaayi — government communications.
+            </div>
+          </div>
+          <div class="telugu-point">
+            <div class="telugu-point-title">5. RSA vs DSA</div>
+            <div class="telugu-point-body">
+              RSA: Encryption+Signing, verify faster. DSA: Sign only, sign
+              faster. Real life: Web SSL certificates — RSA. Government signing
+              applications — DSA.
+            </div>
+          </div>
+          <div class="telugu-point">
+            <div class="telugu-point-title">
+              6. Non-Repudiation — Real: IT Act 2000 India
+            </div>
+            <div class="telugu-point-body">
+              Sender deny cheyyaledu. Legal proof. Real life: eMudhra tho sign
+              chesina document court lo valid evidence — "Naanu sign cheyyledu"
+              ani argue cheyyataniki saadyapadadu.
+            </div>
+          </div>
+          <div class="telugu-point">
+            <div class="telugu-point-title">
+              7. Biometrics — Real: PhonePe & Hyderabad Airport
+            </div>
+            <div class="telugu-point-body">
+              Fingerprint, iris, face, voice. Real life: PhonePe fingerprint —
+              template phone lo matrame, server ki velladu. Hyderabad Airport
+              e-gate iris recognition — queue lekunna immigration.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- UNIT IV TELUGU -->
+      <div class="telugu-section" style="margin-top: 18px">
+        <div class="telugu-header">
+          🪪 UNIT IV — PKI & Smart Cards (14 Marks)
+        </div>
+        <div class="telugu-unit">
+          <div class="telugu-unit-header">
+            ★ TOPIC 1: PKI, Firewalls, VPN — 7 Marks
+          </div>
+          <div class="telugu-point">
+            <div class="telugu-point-title">
+              1. PKI — Real: Chrome HTTPS Lock
+            </div>
+            <div class="telugu-point-body">
+              Certificates create manage distribute revoke framework. Real life:
+              Chrome pre-installed Root CA list — https websites certificate
+              verify chestundi, untrusted CA warning istaundi.
+            </div>
+          </div>
+          <div class="telugu-point">
+            <div class="telugu-point-title">
+              2. Digital Certificates — Real: Bank Website
+            </div>
+            <div class="telugu-point-body">
+              Public key + identity bind. CA sign. Real life: HDFC bank website
+              certificate click chesina chaallu — owner, CA, validity, public
+              key anni choostaam.
+            </div>
+          </div>
+          <div class="telugu-point">
+            <div class="telugu-point-title">
+              3. CA — Real: India CCA eMudhra
+            </div>
+            <div class="telugu-point-body">
+              Trusted third-party. Identity verify, certificate issue. Real
+              life: India Controller of Certifying Authorities (CCA) eMudhra,
+              nCode Solutions ni license chestundi.
+            </div>
+          </div>
+          <div class="telugu-point">
+            <div class="telugu-point-title">
+              4. Certificate Chain — Real: Let's Encrypt
+            </div>
+            <div class="telugu-point-body">
+              Root CA → Intermediate CA → End entity. Real life: Let's Encrypt:
+              ISRG Root CA → R3 Intermediate → website certificate — chain
+              browsers verify chestaayi.
+            </div>
+          </div>
+          <div class="telugu-point">
+            <div class="telugu-point-title">
+              5. POP Key — Real: Smart Card Auth
+            </div>
+            <div class="telugu-point-body">
+              Private key possess chestunadani prove. Real life: Smart card
+              login lo card challenge-response tho private key possess
+              chestunadani prove — impersonation prevent.
+            </div>
+          </div>
+          <div class="telugu-point">
+            <div class="telugu-point-title">
+              6. Firewalls — Real: IT Companies
+            </div>
+            <div class="telugu-point-body">
+              Incoming/outgoing traffic control. 3 types. Real life: TCS Infosys
+              Cisco Palo Alto firewalls — social media gambling block, data
+              exfiltration prevent chestaayi.
+            </div>
+          </div>
+          <div class="telugu-point">
+            <div class="telugu-point-title">
+              7. VPN — Real: COVID Work From Home
+            </div>
+            <div class="telugu-point-body">
+              Encrypted tunnel over internet. IPSec/SSL/TLS. Real life: COVID lo
+              Cisco AnyConnect VPN — office SAP systems, code repos, HR portals
+              home nundi securely access chesaaru.
+            </div>
+          </div>
+        </div>
+        <div class="telugu-unit">
+          <div class="telugu-unit-header">
+            ★ TOPIC 2: Smart Cards & Zero Knowledge — 7 Marks
+          </div>
+          <div class="telugu-point">
+            <div class="telugu-point-title">
+              1. Smart Cards — Real: SBI EMV Chip
+            </div>
+            <div class="telugu-point-body">
+              Microprocessor chip tho plastic card. Real life: SBI/HDFC Visa EMV
+              chip prathi transaction ki unique code generate — old magnetic
+              stripe laaga clone cheyyataniki impossible.
+            </div>
+          </div>
+          <div class="telugu-point">
+            <div class="telugu-point-title">
+              2. Application Security — Real: Jio SIM
+            </div>
+            <div class="telugu-point-body">
+              Private key chip lo — never leaves. Card + PIN = 2FA. Real life:
+              Jio SIM smart card — IMSI keys store, network tower tho
+              challenge-response authenticate chestundi.
+            </div>
+          </div>
+          <div class="telugu-point">
+            <div class="telugu-point-title">
+              3. Zero Knowledge Definition — Real: Color Balls
+            </div>
+            <div class="telugu-point-body">
+              Secret reveal kaakunda prove chestundi. Real life example:
+              Color-blind friend ki rendu different color balls untaayani prove
+              cheyyataniki balls reveal kaakunda ZKP concept use chestaam.
+            </div>
+          </div>
+          <div class="telugu-point">
+            <div class="telugu-point-title">
+              4. ZKP Steps — Real: ATM PIN Verify
+            </div>
+            <div class="telugu-point-body">
+              Commit→Challenge→Respond→Verify→Repeat. Real life: ATM PIN verify
+              — card actual PIN transmit cheyyadam kaadu, mathematical ZKP tho
+              bank server verify chestundi.
+            </div>
+          </div>
+          <div class="telugu-point">
+            <div class="telugu-point-title">
+              5. ZKP in Smart Cards — Real: Bank EMV
+            </div>
+            <div class="telugu-point-body">
+              Actual PIN network lo travel kaadu. Real life: EMV card ATM lo
+              insert chesina appudu PIN hash-based ZKP verify — network sniff
+              chesina PIN catch cheyyataniki saadyapadadu.
+            </div>
+          </div>
+          <div class="telugu-point">
+            <div class="telugu-point-title">
+              6. Attacks — Real: PlayStation 3 Hack 2010
+            </div>
+            <div class="telugu-point-body">
+              Side channel, fault injection, reverse engineering, replay. Real
+              life: 2010 lo PS3 smart chip reverse engineering — Sony firmware
+              update tho fix chesindi, pirates access lost chesaaru.
+            </div>
+          </div>
+          <div class="telugu-point">
+            <div class="telugu-point-title">
+              7. Protection — Real: Indian e-Passport
+            </div>
+            <div class="telugu-point-body">
+              Tamper-resistant, encrypted, auto-lockout, EM shields. Real life:
+              Indian e-Passport chip tamper-resistant — physical attack chesina
+              chaallu chip data destroy avutundi, forgery impossible.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- UNIT V TELUGU -->
+      <div class="telugu-section" style="margin-top: 18px">
+        <div class="telugu-header">🌐 UNIT V — Applications (14 Marks)</div>
+        <div class="telugu-unit">
+          <div class="telugu-unit-header">
+            ★ TOPIC 1: Kerberos, SSL, IPSec, E-Payments — 7 Marks
+          </div>
+          <div class="telugu-point">
+            <div class="telugu-point-title">
+              1. Kerberos — Real: Office Windows Login
+            </div>
+            <div class="telugu-point-body">
+              Symmetric key + KDC. Mutual authentication. MIT develop. Real
+              life: Infosys office PC domain login — Kerberos DC verify
+              chestundi, oka ticket tho file server email SAP anni access.
+            </div>
+          </div>
+          <div class="telugu-point">
+            <div class="telugu-point-title">
+              2. Kerberos Steps — Real: Single Sign-On
+            </div>
+            <div class="telugu-point-body">
+              AS→TGT, TGS→Service Ticket, Server→Access. Real life: Oka login
+              tho multiple office services — single sign-on concept, employee
+              productivity increase avutundi.
+            </div>
+          </div>
+          <div class="telugu-point">
+            <div class="telugu-point-title">
+              3. SSL/TLS — Real: HDFC Netbanking
+            </div>
+            <div class="telugu-point-body">
+              Browser-server encrypted comm. Server auth, data encryption,
+              integrity. Real life: https://netbanking.hdfcbank.com TLS 1.3 —
+              padlock click chesina connection details choostaam.
+            </div>
+          </div>
+          <div class="telugu-point">
+            <div class="telugu-point-title">
+              4. SSL Handshake — Real: Google.com
+            </div>
+            <div class="telugu-point-body">
+              ClientHello→ServerHello+Cert→Verify→Pre-master→Session
+              key→Encrypted comm. Real life: Google.com open chesina prathi
+              saari ee handshake milliseconds lo complete avutundi.
+            </div>
+          </div>
+          <div class="telugu-point">
+            <div class="telugu-point-title">
+              5. IPSec — Real: TCS Office VPN
+            </div>
+            <div class="telugu-point-body">
+              Transport mode (payload), Tunnel mode (full packet). AH + ESP.
+              Real life: TCS Hyderabad-Mumbai offices madhya IPSec Tunnel mode —
+              SAP transactions, code commits anni encrypted.
+            </div>
+          </div>
+          <div class="telugu-point">
+            <div class="telugu-point-title">
+              6. E-Payments & E-Cash — Real: UPI, Bitcoin
+            </div>
+            <div class="telugu-point-body">
+              E-Payments: SSL/TLS secured. E-Cash: blind signatures, anonymous.
+              Real life: UPI transactions NPCI SSL secured. Bitcoin SHA-256
+              e-cash, India CBDC (Digital Rupee) coming.
+            </div>
+          </div>
+          <div class="telugu-point">
+            <div class="telugu-point-title">
+              7. Micro Payments — Real: Brave Browser BAT
+            </div>
+            <div class="telugu-point-body">
+              Small payments under ₹1. PayWord hash chains, MicroMint. Real
+              life: Brave Browser users BAT cryptocurrency creators ki micro
+              payments istaaru ads chustunnanduku.
+            </div>
+          </div>
+        </div>
+        <div class="telugu-unit">
+          <div class="telugu-unit-header">
+            ★ TOPIC 2: SET & Enterprise Security — 7 Marks
+          </div>
+          <div class="telugu-point">
+            <div class="telugu-point-title">1. SET — Real: Amazon Pay Visa</div>
+            <div class="telugu-point-body">
+              Visa MasterCard develop. Merchant card details choodaleru. Real
+              life: Amazon pai Visa use chesina appudu card number Amazon ki
+              velladu — directly payment gateway ki encrypted ga.
+            </div>
+          </div>
+          <div class="telugu-point">
+            <div class="telugu-point-title">
+              2. SET Components — Real: Flipkart Purchase
+            </div>
+            <div class="telugu-point-body">
+              Cardholder, Merchant, Payment Gateway, CA, Issuer Bank, Acquirer
+              Bank. Real life: Flipkart purchase — Meeru (cardholder), Flipkart
+              (merchant), Razorpay (gateway), HDFC (issuer bank).
+            </div>
+          </div>
+          <div class="telugu-point">
+            <div class="telugu-point-title">
+              3. SET Transaction — Real: Swiggy Food Order
+            </div>
+            <div class="telugu-point-body">
+              Dual sign → Merchant order gets, Gateway payment gets → Bank
+              authorize. Real life: Swiggy food order — card details Swiggy
+              servers ki never vellaayi, payment gateway ki matrame.
+            </div>
+          </div>
+          <div class="telugu-point">
+            <div class="telugu-point-title">
+              4. Dual Signature — Real: Privacy Protection
+            </div>
+            <div class="telugu-point-body">
+              Order + Payment messages hash tho link. Merchant payment
+              choodaleru, bank order choodaleru. Real life: Online shopping —
+              merchant meeru em order chesindaa telustundi, card details
+              choodaleru.
+            </div>
+          </div>
+          <div class="telugu-point">
+            <div class="telugu-point-title">5. .NET Security — Real: IRCTC</div>
+            <div class="telugu-point-body">
+              CAS, Role-Based, AES/RSA classes, SslStream. Real life: IRCTC .NET
+              — railway admin trains add cheyyagaligitundi, regular users
+              tickets book matrame cheyyagaligitundi, role-based.
+            </div>
+          </div>
+          <div class="telugu-point">
+            <div class="telugu-point-title">6. J2EE — Real: ICICI Banking</div>
+            <div class="telugu-point-body">
+              JAAS authentication, declarative security, programmatic security.
+              Real life: ICICI J2EE — teller accounts view cheyyagaligitundi,
+              branch manager large transfers approve — role-based.
+            </div>
+          </div>
+          <div class="telugu-point">
+            <div class="telugu-point-title">
+              7. Enterprise Security — Real: SBI 5 Layers
+            </div>
+            <div class="telugu-point-body">
+              5 layers defense. Real life: SBI — Cisco firewalls + Network IDS +
+              WAF + HSM key storage + Biometric data center access + RBI
+              mandatory annual security audits.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- =============== MIND MAP =============== -->
+      <div class="mindmap-section">
+        <div class="mindmap-title">
+          🧠 COMPLETE MIND MAP — Network Security PEC321
+        </div>
+        <div class="mm-center-wrap">
+          <div class="mm-center">
+            🔐 NETWORK SECURITY<br /><small
+              style="font-weight: 400; font-size: 12px"
+              >PEC321 — Osmania University MCA 2025-26</small
+            >
+          </div>
+        </div>
+        <div
+          style="
+            text-align: center;
+            margin: 8px 0;
+            color: #999;
+            font-size: 12px;
+          "
+        >
+          ▼ ▼ ▼ ▼ ▼
+        </div>
+        <div class="mm-units-row">
+          <div class="mm-unit-block">
+            <div class="mm-unit-node mm-u1">📖 UNIT I<br />Introduction</div>
+            <div class="mm-subtopics">
+              <div class="mm-sub" style="background: #ef9a9a; color: #b71c1c">
+                🔒 Integrity
+              </div>
+              <div class="mm-sub" style="background: #ef9a9a; color: #b71c1c">
+                ✅ Authenticity
+              </div>
+              <div class="mm-sub" style="background: #ef9a9a; color: #b71c1c">
+                📜 Non-Repudiation
+              </div>
+              <div class="mm-sub" style="background: #ef9a9a; color: #b71c1c">
+                🔐 Confidentiality
+              </div>
+              <div class="mm-sub" style="background: #ef9a9a; color: #b71c1c">
+                🚪 Authorization
+              </div>
+              <div class="mm-sub" style="background: #ef9a9a; color: #b71c1c">
+                👤 Anonymity
+              </div>
+              <div class="mm-sub" style="background: #ef9a9a; color: #b71c1c">
+                ⚡ Availability
+              </div>
+              <div class="mm-sub" style="background: #ffcdd2; color: #b71c1c">
+                💥 DoS Attack
+              </div>
+              <div class="mm-sub" style="background: #ffcdd2; color: #b71c1c">
+                🎭 IP Spoofing
+              </div>
+              <div class="mm-sub" style="background: #ffcdd2; color: #b71c1c">
+                🔄 Replay Attack
+              </div>
+              <div class="mm-sub" style="background: #ffcdd2; color: #b71c1c">
+                🕵️ MITM
+              </div>
+              <div class="mm-sub" style="background: #ffcdd2; color: #b71c1c">
+                🐛 Worms
+              </div>
+              <div class="mm-sub" style="background: #ffcdd2; color: #b71c1c">
+                🦠 Viruses
+              </div>
+              <div class="mm-sub" style="background: #ffcdd2; color: #b71c1c">
+                🐴 Trojans
+              </div>
+            </div>
+          </div>
+          <div class="mm-unit-block">
+            <div class="mm-unit-node mm-u2">🔑 UNIT II<br />Cryptography</div>
+            <div class="mm-subtopics">
+              <div class="mm-sub" style="background: #ffe0b2; color: #e65100">
+                Secret Key
+              </div>
+              <div class="mm-sub" style="background: #ffcc80; color: #e65100">
+                🔄 DES (56-bit)
+              </div>
+              <div class="mm-sub" style="background: #ffcc80; color: #e65100">
+                3️⃣ Triple DES
+              </div>
+              <div class="mm-sub" style="background: #ffcc80; color: #e65100">
+                ⭐ AES (256-bit)
+              </div>
+              <div class="mm-sub" style="background: #ffcc80; color: #e65100">
+                📦 Key Distribution
+              </div>
+              <div class="mm-sub" style="background: #ffe0b2; color: #e65100">
+                Public Key
+              </div>
+              <div class="mm-sub" style="background: #ffcc80; color: #e65100">
+                🔐 RSA
+              </div>
+              <div class="mm-sub" style="background: #ffcc80; color: #e65100">
+                📱 ECC
+              </div>
+              <div class="mm-sub" style="background: #ffcc80; color: #e65100">
+                🤝 Diffie-Hellman
+              </div>
+              <div class="mm-sub" style="background: #ffcc80; color: #e65100">
+                ☕ Java JCE
+              </div>
+              <div class="mm-sub" style="background: #ffcc80; color: #e65100">
+                ⚔️ Attacks
+              </div>
+            </div>
+          </div>
+          <div class="mm-unit-block">
+            <div class="mm-unit-node mm-u3">
+              🔏 UNIT III<br />Integrity & Auth
+            </div>
+            <div class="mm-subtopics">
+              <div class="mm-sub" style="background: #c8e6c9; color: #1b5e20">
+                Hash Functions
+              </div>
+              <div class="mm-sub" style="background: #a5d6a7; color: #1b5e20">
+                🔢 MD5 (128-bit)
+              </div>
+              <div class="mm-sub" style="background: #a5d6a7; color: #1b5e20">
+                🔢 SHA-256/512
+              </div>
+              <div class="mm-sub" style="background: #a5d6a7; color: #1b5e20">
+                🏷️ MAC
+              </div>
+              <div class="mm-sub" style="background: #a5d6a7; color: #1b5e20">
+                🏷️ HMAC
+              </div>
+              <div class="mm-sub" style="background: #c8e6c9; color: #1b5e20">
+                Digital Signatures
+              </div>
+              <div class="mm-sub" style="background: #a5d6a7; color: #1b5e20">
+                ✍️ RSA Signature
+              </div>
+              <div class="mm-sub" style="background: #a5d6a7; color: #1b5e20">
+                ✍️ DSA
+              </div>
+              <div class="mm-sub" style="background: #c8e6c9; color: #1b5e20">
+                Biometrics
+              </div>
+              <div class="mm-sub" style="background: #a5d6a7; color: #1b5e20">
+                👆 Fingerprint/Iris
+              </div>
+              <div class="mm-sub" style="background: #a5d6a7; color: #1b5e20">
+                🎤 Voice/Gait
+              </div>
+            </div>
+          </div>
+          <div class="mm-unit-block">
+            <div class="mm-unit-node mm-u4">
+              🪪 UNIT IV<br />PKI & Smart Cards
+            </div>
+            <div class="mm-subtopics">
+              <div class="mm-sub" style="background: #bbdefb; color: #0d47a1">
+                PKI Framework
+              </div>
+              <div class="mm-sub" style="background: #90caf9; color: #0d47a1">
+                📄 Digital Certs
+              </div>
+              <div class="mm-sub" style="background: #90caf9; color: #0d47a1">
+                🏛️ CA (eMudhra)
+              </div>
+              <div class="mm-sub" style="background: #90caf9; color: #0d47a1">
+                🔗 Cert Chain
+              </div>
+              <div class="mm-sub" style="background: #90caf9; color: #0d47a1">
+                🔑 POP Key
+              </div>
+              <div class="mm-sub" style="background: #bbdefb; color: #0d47a1">
+                Network Security
+              </div>
+              <div class="mm-sub" style="background: #90caf9; color: #0d47a1">
+                🛡️ Firewalls (3 types)
+              </div>
+              <div class="mm-sub" style="background: #90caf9; color: #0d47a1">
+                🌐 VPN (IPSec/SSL)
+              </div>
+              <div class="mm-sub" style="background: #bbdefb; color: #0d47a1">
+                Smart Cards
+              </div>
+              <div class="mm-sub" style="background: #90caf9; color: #0d47a1">
+                💳 EMV Chip
+              </div>
+              <div class="mm-sub" style="background: #90caf9; color: #0d47a1">
+                🤫 Zero Knowledge
+              </div>
+              <div class="mm-sub" style="background: #90caf9; color: #0d47a1">
+                ⚡ Side Channel Atk
+              </div>
+            </div>
+          </div>
+          <div class="mm-unit-block">
+            <div class="mm-unit-node mm-u5">🌐 UNIT V<br />Applications</div>
+            <div class="mm-subtopics">
+              <div class="mm-sub" style="background: #e1bee7; color: #4a148c">
+                Authentication
+              </div>
+              <div class="mm-sub" style="background: #ce93d8; color: #4a148c">
+                🎫 Kerberos+KDC
+              </div>
+              <div class="mm-sub" style="background: #ce93d8; color: #4a148c">
+                🔒 SSL/TLS Handshake
+              </div>
+              <div class="mm-sub" style="background: #ce93d8; color: #4a148c">
+                🌐 IPSec (AH+ESP)
+              </div>
+              <div class="mm-sub" style="background: #e1bee7; color: #4a148c">
+                E-Commerce
+              </div>
+              <div class="mm-sub" style="background: #ce93d8; color: #4a148c">
+                💳 E-Payments
+              </div>
+              <div class="mm-sub" style="background: #ce93d8; color: #4a148c">
+                ₿ E-Cash/Bitcoin
+              </div>
+              <div class="mm-sub" style="background: #ce93d8; color: #4a148c">
+                🪙 Micro Payments
+              </div>
+              <div class="mm-sub" style="background: #ce93d8; color: #4a148c">
+                🛒 SET + Dual Sig
+              </div>
+              <div class="mm-sub" style="background: #e1bee7; color: #4a148c">
+                Enterprise
+              </div>
+              <div class="mm-sub" style="background: #ce93d8; color: #4a148c">
+                💻 .NET Security
+              </div>
+              <div class="mm-sub" style="background: #ce93d8; color: #4a148c">
+                ☕ J2EE / JAAS
+              </div>
+              <div class="mm-sub" style="background: #ce93d8; color: #4a148c">
+                🏢 Defense in Depth
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- REAL LIFE MIND MAP ROW -->
+        <div
+          style="
+            margin-top: 20px;
+            background: linear-gradient(135deg, #fff8e1, #fff3e0);
+            border-radius: 12px;
+            padding: 15px 18px;
+            border: 2px solid #ff6f00;
+          "
+        >
+          <div
+            style="
+              text-align: center;
+              font-weight: 800;
+              color: #ff6f00;
+              margin-bottom: 12px;
+              font-size: 14px;
+            "
+          >
+            🌍 REAL-LIFE CONNECTION MAP — India Focus
+          </div>
+          <div
+            style="
+              display: grid;
+              grid-template-columns: repeat(auto-fit, minmax(155px, 1fr));
+              gap: 8px;
+            "
+          >
+            <div
+              style="
+                background: white;
+                border-radius: 8px;
+                padding: 8px;
+                border-left: 4px solid #e53935;
+                font-size: 10px;
+              "
+            >
+              <b style="color: #e53935; font-size: 11px">UNIT I</b><br />•
+              WannaCry → AP Police 2017<br />• Zeus Trojan → Banking theft<br />•
+              GitHub DDoS 2018
+            </div>
+            <div
+              style="
+                background: white;
+                border-radius: 8px;
+                padding: 8px;
+                border-left: 4px solid #fb8c00;
+                font-size: 10px;
+              "
+            >
+              <b style="color: #fb8c00; font-size: 11px">UNIT II</b><br />•
+              WhatsApp = AES-256<br />• SBI HTTPS = RSA-2048<br />• Signal = ECC
+              Curve25519
+            </div>
+            <div
+              style="
+                background: white;
+                border-radius: 8px;
+                padding: 8px;
+                border-left: 4px solid #43a047;
+                font-size: 10px;
+              "
+            >
+              <b style="color: #43a047; font-size: 11px">UNIT III</b><br />•
+              Aadhaar eSign = RSA/DSA<br />• PhonePe = Fingerprint<br />•
+              Bitcoin = SHA-256
+            </div>
+            <div
+              style="
+                background: white;
+                border-radius: 8px;
+                padding: 8px;
+                border-left: 4px solid #1e88e5;
+                font-size: 10px;
+              "
+            >
+              <b style="color: #1e88e5; font-size: 11px">UNIT IV</b><br />• SBI
+              EMV = Smart Card<br />• eMudhra = India CA<br />• WFH COVID = VPN
+            </div>
+            <div
+              style="
+                background: white;
+                border-radius: 8px;
+                padding: 8px;
+                border-left: 4px solid #8e24aa;
+                font-size: 10px;
+              "
+            >
+              <b style="color: #8e24aa; font-size: 11px">UNIT V</b><br />•
+              Office Login = Kerberos<br />• Amazon Pay = SET concept<br />•
+              ICICI = J2EE + JAAS
+            </div>
+          </div>
+        </div>
+
+        <!-- QUICK REVISION TABLE -->
+        <div style="margin-top: 18px">
+          <p
+            style="
+              font-weight: 800;
+              color: #1a237e;
+              font-size: 14px;
+              margin-bottom: 8px;
+              padding-bottom: 6px;
+              border-bottom: 2px solid #ff6f00;
+            "
+          >
+            ⚡ ALL UNITS QUICK REVISION — One Glance
+          </p>
+          <table class="comp-table" style="margin: 0; width: 100%">
+            <tr>
+              <th>Unit</th>
+              <th>Topic 1 (7M)</th>
+              <th>Topic 2 (7M)</th>
+              <th>Key Algorithms</th>
+              <th>India Real Life</th>
+            </tr>
+            <tr>
+              <td><b>I</b></td>
+              <td>Security Attributes (7)</td>
+              <td>DoS, IP Spoof, MITM, Worm, Virus, Trojan</td>
+              <td>—</td>
+              <td>WannaCry→AP Police, GitHub DDoS</td>
+            </tr>
+            <tr>
+              <td><b>II</b></td>
+              <td>DES → 3DES → AES, Key Distribution</td>
+              <td>RSA, ECC, Diffie-Hellman, JCE</td>
+              <td>AES-256, RSA-2048</td>
+              <td>WhatsApp AES, SBI HTTPS RSA</td>
+            </tr>
+            <tr>
+              <td><b>III</b></td>
+              <td>MD5, SHA-256, MAC, HMAC</td>
+              <td>RSA/DSA Signatures, Biometrics</td>
+              <td>SHA-256, HMAC, RSA, DSA</td>
+              <td>Aadhaar eSign, PhonePe Fingerprint</td>
+            </tr>
+            <tr>
+              <td><b>IV</b></td>
+              <td>PKI, Digital Certs, CA, Firewalls, VPN</td>
+              <td>Smart Cards, Zero Knowledge Protocol</td>
+              <td>X.509, IPSec, ZKP</td>
+              <td>eMudhra CA, SBI EMV Chip, VPN WFH</td>
+            </tr>
+            <tr>
+              <td><b>V</b></td>
+              <td>Kerberos, SSL/TLS, IPSec, E-Cash</td>
+              <td>SET, Dual Signature, .NET, J2EE</td>
+              <td>TLS 1.3, SET</td>
+              <td>Office Kerberos, Amazon Pay SET, ICICI J2EE</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <p>📘 Network Security — PEC321 | Osmania University MCA | 2025–2026</p>
+      <p style="margin-top: 4px; opacity: 0.7">
+        English + Roman Telugu | 5 Units × 14 Marks | Real-Life Examples
+        Included | Interactive Mind Map
+      </p>
+      <p style="margin-top: 4px; opacity: 0.8">
+        🖨️ Press Ctrl+P (Windows) or Cmd+P (Mac) → Save as PDF → Choose "Save to
+        PDF" as destination
+      </p>
+    </div>
+  </body>
+</html>
